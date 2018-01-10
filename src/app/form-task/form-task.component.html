@@ -1,0 +1,121 @@
+
+<h3>Task Details</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-group">
+          <label for="TaskName">Task name</label>
+          <input 
+            type="text"
+            id="TaskName"
+            class="form-control"
+            ngModel
+            name="TaskName"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="Method">Method</label>
+            <div class="radio">
+              <label class="radio-inline"><input type="radio" name="Method" id="method" ngModel name="Method" required value="GET" checked="checked">GET</label>
+              <label class="radio-inline"><input type="radio" name="Method" id="method" ngModel name="Method" required value="POST">POST</label>
+              <label class="radio-inline"><input type="radio" name="Method" id="method" ngModel name="Method" required value="PUT">PUT</label>
+              <label class="radio-inline"><input type="radio" name="Method" id="method" ngModel name="Method" required value="DELETE">DELETE</label>          
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="serviceURL">Service URL</label>
+            <input 
+              type="text"
+              id="serviceURL"
+              class="form-control"
+              ngModel
+              name="serviceURL"
+              required>
+          </div>
+          <div class="form-group">
+              <label for="login">Credentials Login</label>
+              <input 
+                type="text"
+                id="login"
+                class="form-control"
+                ngModel
+                name="login">
+          </div>
+          <div class="form-group">
+                <label for="password">Credentials Password</label>
+                <input 
+                  type="text"
+                  id="password"
+                  class="form-control"
+                  ngModel
+                  name="password">
+           </div>
+           <div class="form-group">
+              <label for="timeout">Timeout</label>
+              <input 
+                type="text"
+                id="timeout"
+                class="form-control"
+                ngModel
+                name="timeout"
+                value="0">                
+          </div>
+          <div class="form-group">
+              <label for="crone_expr">Crone expression</label>
+              <input 
+                type="text"
+                id="crone_expr"
+                class="form-control"
+                ngModel
+                name="crone_expr"
+                required>                
+          </div>
+          <div class="form-group">
+              <label for="crone_expr">Header</label>
+              <select class="form-control" id="header" ngModel
+              name="crone_expr" required> 
+                  <option>1</option>
+                  <option>2</option>                  
+                </select>              
+          </div>
+          <div class="form-group">
+              <label for="crone_expr">Body</label>
+              <select class="form-control" id="body" ngModel
+              name="body" required> 
+                  <option>1</option>
+                  <option>2</option>                  
+                </select>              
+          </div>
+          <div class="form-group">
+              <label for="status">Status</label>
+                <div class="radio">
+                  <label class="radio-inline"><input type="radio" name="status" id="status" ngModel name="status" required value="Inactive" checked="checked">Inactive</label>
+                  <label class="radio-inline"><input type="radio" name="status" id="status" ngModel name="status" required value="Active">Active</label>                  
+                </div>
+          </div>  
+          <div class="form-group">
+              <label for="donotrun">Do not run at the same time as</label>
+              <select multiple class="form-control" id="donotrun" ngModel
+              name="donotrun" required> 
+                  <option>Task 1</option>
+                  <option>Task 2</option>                  
+                  <option>Task 3</option>                  
+                  <option>Task 4</option>                  
+                  <option>Task 5</option>                  
+                </select>              
+          </div>
+          <div class="form-group">
+              <label for="history">History</label>
+              <select class="form-control" id="history" ngModel
+              name="history" required> 
+                  <option>Log 1</option>
+                  <option>Log 2</option>                  
+                  <option>Log 3</option>                  
+                </select>              
+          </div>          
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
