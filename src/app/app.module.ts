@@ -2,35 +2,38 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ServerComponent} from './server/server.component';
-import { ServersComponent } from './servers/servers.component';
-import { WarningAlertComponent } from './warning-alert/warning-alert.component';
-import { SuccessAlertComponent } from './success-alert/success-alert.component';
 import { FormTaskComponent } from './form-task/form-task.component';
 import { ViewTasksComponent } from './view-tasks/view-tasks.component';
-import { TaskServiceComponent } from './task-service/task-service.component';
+import { TaskService } from './task.service/task.service';
+import { EditTaskComponent } from './edit-task/edit-task-component';
+import { HomeComponent } from './home/home.component';
+//import { TaskService } from './task.service/task.service';
 
+const appRoutes: Routes = [
+ { path: '', component: HomeComponent},
+ { path: 'tasks', component: ViewTasksComponent},
+ { path: 'tasks/:id', component: EditTaskComponent},
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ServersComponent,
-    WarningAlertComponent,
-    SuccessAlertComponent,
     FormTaskComponent,
+    EditTaskComponent,
     ViewTasksComponent,
-    TaskServiceComponent
+    HomeComponent
+    //TaskService
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
-
+    HttpModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

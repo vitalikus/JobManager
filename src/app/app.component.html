@@ -1,4 +1,31 @@
-<h3>Main App</h3>
+<h4>Welcome to Job Manager</h4>
+<p>Manage your tasks and jobs</p>
 <hr>
-<app-view-tasks></app-view-tasks>
-<app-form-task></app-form-task>
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <ul class="nav nav-tabs">
+          <li role="presentation"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="/">Home</a>
+          </li>
+          <li role="presentation"
+              routerLinkActive="active">
+            <a routerLink="/tasks">Tasks</a>
+            
+          </li>
+          <li role="presentation"
+              routerLinkActive="active">
+            <a [routerLink]="['task']">Add task</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  

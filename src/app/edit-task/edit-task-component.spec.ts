@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SuccessAlertComponent } from './success-alert.component';
+import { EditTaskComponentComponent } from './edit-task-component.component';
 
-describe('SuccessAlertComponent', () => {
-  let component: SuccessAlertComponent;
-  let fixture: ComponentFixture<SuccessAlertComponent>;
+describe('EditTaskComponentComponent', () => {
+  let component: EditTaskComponentComponent;
+  let fixture: ComponentFixture<EditTaskComponentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SuccessAlertComponent ]
+      declarations: [ EditTaskComponentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SuccessAlertComponent);
+    fixture = TestBed.createComponent(EditTaskComponentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
