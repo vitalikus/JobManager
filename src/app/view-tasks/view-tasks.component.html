@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let task of tasksArray.models">
-          <td><a routerLink=":{{task._id}}">{{task.TaskName}}</a></td>
+          <td><a routerLink="{{task._id}}">{{task.TaskName}}</a></td>
           <td>{{task.ActiveStatus}}</td>
           <td>{{task.Cron}}</td>
           <td>{{task._id}}</td>

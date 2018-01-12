@@ -21,7 +21,5 @@ export class AppComponent {
  constructor (private route: ActivatedRoute, 
     private router: Router) {}
   
-  sendMeHome() {
-    this.router.navigate(['']);
-  }
+ 
 }

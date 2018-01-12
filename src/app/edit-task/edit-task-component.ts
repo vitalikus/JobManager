@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 //import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { Response } from '@angular/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params  } from '@angular/router';
 
 import { TaskService } from '../task.service/task.service';
 //import { ViewChild } from '@angular/core/src/metadata/di';
@@ -13,6 +13,8 @@ import { TaskService } from '../task.service/task.service';
   styleUrls: ['./edit-task-component.css']
 })
 export class EditTaskComponent implements OnInit {  
+  id: string;
+  editMode = false;
   //tasksService: any;
   //@ViewChild('f') signupForm: NgForm;
 
@@ -20,9 +22,9 @@ export class EditTaskComponent implements OnInit {
   
   constructor(private tasksService: TaskService,
               private route: ActivatedRoute) { 
-    this.route.params.subscribe(res => console.log(res.id));
+    this.route.params.subscribe(this.newMethod());
+    console.log (this.id);
   }
-  id="";
   task = {
     "Body": "",
     "ConflictTasks": [
@@ -37,7 +39,20 @@ export class EditTaskComponent implements OnInit {
     "_rev": ""
   }
 
+  private newMethod(): (value: Params) => void {
+    return params => this.id = params['id'];
+  }
+
   ngOnInit() {
+    this.route.params
+    .subscribe(
+      (params: Params) => {
+        this.id = params['id'];
+        this.editMode = params['id'] != null;
+      }
+    ); 
+
+
     this.tasksService.getTaskById(this.id).subscribe(
       (response: Response) => {
         this.task = response.json();

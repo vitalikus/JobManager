@@ -8,12 +8,12 @@ export class TaskService  {
 
   constructor(private http: Http) {}
   
+  headers = new Headers({'Content-Type': 'application/json'});
+
   getTasks() {
-    const headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/tasks', {headers: headers});
+    return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/tasks', {headers: this.headers});
   }
-  getTaskById(id: string) {
-    const headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/'+id, {headers: headers});
+  getTaskById(id: string) {    
+    return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/'+id, {headers: this.headers});
   }
 }
