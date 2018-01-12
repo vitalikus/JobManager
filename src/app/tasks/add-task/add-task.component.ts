@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 //import { ViewChild } from '@angular/core/src/metadata/di';
 
 @Component({
-  selector: 'app-form-task',
-  templateUrl: './form-task.component.html',
-  styleUrls: ['./form-task.component.css']
+  selector: 'app-add-task',
+  templateUrl: './add-task.component.html',
+  styleUrls: ['./add-task.component.css']
 })
-export class FormTaskComponent implements OnInit {
+export class AddTaskComponent implements OnInit {
   //task: { id: string };
   @ViewChild('f') signupForm: NgForm;
 

@@ -18,7 +18,7 @@ export class EditTaskComponent implements OnInit {
   //tasksService: any;
   //@ViewChild('f') signupForm: NgForm;
 
-  submitted = false;
+  saved = false;
   
   constructor(private tasksService: TaskService,
               private route: ActivatedRoute) { 
@@ -48,6 +48,7 @@ export class EditTaskComponent implements OnInit {
     .subscribe(
       (params: Params) => {
         this.id = params['id'];
+        //this.rev = params['_rev'];
         this.editMode = params['id'] != null;
       }
     ); 
@@ -63,8 +64,7 @@ export class EditTaskComponent implements OnInit {
     );
   }
 
-  onSubmit () {
-    this.submitted = true;    
+  onSave () {
+    this.saved = true;    
   }
-
 }

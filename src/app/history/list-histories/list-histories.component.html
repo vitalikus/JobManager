@@ -1,0 +1,27 @@
+<h3>Histories View</h3>
+<div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Duration</th>
+          <th>Response body</th>
+          <th>Response Status</th>
+          <th>Start date</th>
+          <th>Id</th>
+          <th>Rev</th>
+          <th>Task Id</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let history of historyArray.models">
+          <td><a routerLink="{{history._id}}">{{task._id}}</a></td>
+          <td>{{history.ResponseBody}}</td>
+          <td>{{history.ResponseStatus}}</td>
+          <td>{{history.StartDate}}</td>          
+          <td>{{history._id}}</td>
+          <td>{{history._rev}}</td>
+          <td>{{history._taskId}}</td>
+        </tr>       
+      </tbody>
+    </table>
+</div>
