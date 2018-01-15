@@ -5,6 +5,7 @@ import { Response } from '@angular/http';
 import { ActivatedRoute, Params  } from '@angular/router';
 
 import { TaskService } from '../task.service/task.service';
+import { HistoryService } from '../../history/history.service/history.service';
 //import { ViewChild } from '@angular/core/src/metadata/di';
 
 @Component({
@@ -14,6 +15,9 @@ import { TaskService } from '../task.service/task.service';
 })
 export class EditTaskComponent implements OnInit {  
   id: string;
+  
+  //task;
+  arrayHistory: {Body: string}[]=[];
   editMode = false;
   //tasksService: any;
   //@ViewChild('f') signupForm: NgForm;
@@ -21,6 +25,7 @@ export class EditTaskComponent implements OnInit {
   saved = false;
   
   constructor(private tasksService: TaskService,
+              private historyService: HistoryService,
               private route: ActivatedRoute) { 
     this.route.params.subscribe(this.newMethod());
     console.log (this.id);
@@ -48,7 +53,6 @@ export class EditTaskComponent implements OnInit {
     .subscribe(
       (params: Params) => {
         this.id = params['id'];
-        //this.rev = params['_rev'];
         this.editMode = params['id'] != null;
       }
     ); 
@@ -62,9 +66,21 @@ export class EditTaskComponent implements OnInit {
        console.log(error)
      }
     );
+
+    this.historyService.getHistoryByTaskId(this.task._id).subscribe(
+      (response: Response) => {
+        this.arrayHistory = response.json();
+     },
+     (error) => {
+       console.log(error)
+     }
+    );
   }
 
   onSave () {
+    console.log ("Task.Id = "+ this.task._id);
+    console.log ("Task.rev = "+ this.task._rev);
+   // this.tasksService.updateTask(this.task._id, this.task._rev);
     this.saved = true;    
   }
 }

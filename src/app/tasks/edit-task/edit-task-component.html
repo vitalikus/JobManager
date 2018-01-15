@@ -3,16 +3,20 @@
 <div class="container">
   <div class="row">
 
-      <form (ngSubmit)="onSubmit()">
+      <form #taskForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="TaskName">Task name</label>
+          <label for="task.TaskName">Task name</label>
           <input 
             type="text"
             id="TaskName"
             class="form-control"
             [(ngModel)]="task.TaskName"           
-            name="TaskName"
+            name="task.TaskName"
             required>
+            <div [hidden]="task.TaskName.valid"
+     class="alert alert-danger">
+  Task name is required
+</div>
         </div>        
         <div class="form-group">
             <label for="ScheduledUrl">Service URL</label>
@@ -77,12 +81,11 @@
           </div>
           <div class="form-group">
               <label for="history">History</label>
-              <select class="form-control" id="history" ngModel
+
+              <select multiple class="form-control" id="history" ngModel
               name="history" required> 
-                  <option>Log 1</option>
-                  <option>Log 2</option>                  
-                  <option>Log 3</option>                  
-                </select>              
+              <option *ngFor="let history of arrayHistory.models">{{history.ResponseStatus}} - {{history.StartDate}} - {{history.Duration}} -  {{history.ResponseBody}}</option>                  
+                </select>                                       
           </div>          
         <button class="btn btn-primary" type="submit">Save</button>
       </form>

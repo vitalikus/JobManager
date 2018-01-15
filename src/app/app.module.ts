@@ -13,16 +13,17 @@ import { EditTaskComponent } from './tasks/edit-task/edit-task-component';
 import { TaskService } from './tasks/task.service/task.service';
 import { HistoryComponent } from './history/history.component';
 import { ListHistoriesComponent } from './history/list-histories/list-histories.component';
+import { HistoryService } from './history/history.service/history.service';
 
 //import { TaskService } from './task.service/task.service';
 // children: [
 
 const appRoutes: Routes = [
  { path: '', component: HomeComponent},
- { path: 'history', component: ListHistoriesComponent},
  { path: 'tasks', component: ViewTasksComponent}, 
  { path: 'tasks/:id', component: EditTaskComponent},
- { path: 'tasks/add', component: AddTaskComponent}
+ { path: 'tasks/add', component: AddTaskComponent},
+ { path: 'history', component: ListHistoriesComponent}
 ];
 
 @NgModule({
@@ -42,8 +43,8 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  exports: [RouterModule],
-  providers: [TaskService],
+ // exports: [RouterModule],
+  providers: [TaskService, HistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
