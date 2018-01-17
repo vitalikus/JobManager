@@ -1,6 +1,10 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Response } from '@angular/http';
+import { ActivatedRoute, Params  } from '@angular/router';
+
+import { TaskService } from '../task.service/task.service';
+import { HistoryService } from '../../history/history.service/history.service';
 //import { ViewChild } from '@angular/core/src/metadata/di';
 
 @Component({
@@ -10,35 +14,56 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
   //task: { id: string };
-  @ViewChild('f') signupForm: NgForm;
+  //@ViewChild('f') signupForm: NgForm;
 
   submitted = false;
+  //id;
   
-  constructor(private route: ActivatedRoute) { 
-    this.route.params.subscribe(res => console.log(res.id));
-  }
+  constructor(private tasksService: TaskService,
+    private historyService: HistoryService,
+    private route: ActivatedRoute) { 
+      this.route.params.subscribe();
+      //console.log (this.id);
+    }
 
-  task = {
+  task = {    
+    "TaskName": "",
+    "ScheduledUrl": "",
+    "Headers": {},
     "Body": "",
+    "Cron": "",    
+    "MaxDuration": 0,
     "ConflictTasks": [
       ""
-    ],
-    "Cron": "",
-    "Headers": {},
-    "MaxDuration": 0,
-    "ScheduledUrl": "",
-    "TaskName": "",
-    "_id": "",
-    "_rev": ""
+    ],     
   }
 
   ngOnInit() {
   }
 
+  /* private newMethod(): (value: Params) => void {
+    return params => this.id = params['id'];
+  } */
+
   onSubmit () {
     this.submitted = true;
+ 
+    console.log ("saved = " + this.submitted);     
+    console.log ("Task name =" + this.task.TaskName);
+    console.log ("Task ScheduledUrl=" + this.task.ScheduledUrl);
+    console.log ("Task Headers=" + this.task.Headers);
+    console.log ("Task cron=" + this.task.Cron);
+    console.log ("Task MaxDuration=" + this.task.MaxDuration);
+    console.log ("Task ConflictTasks=" + this.task.ConflictTasks);
     
-    this.signupForm.reset();
+    this.tasksService.createTask().subscribe(
+      (response: Response) => {
+        console.log(response);
+        //this.resetTask();
+      },
+      (error) => console.log(error)
+    ); 
+    //this.signupForm.reset();
   }
 
 }

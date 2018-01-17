@@ -2,120 +2,83 @@
 <h3>Task Details</h3>
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form (ngSubmit)="onSubmit()" #f="ngForm">
+
+      <form #taskForm="ngForm" (ngSubmit)="onSave()" >
         <div class="form-group">
           <label for="TaskName">Task name</label>
           <input 
             type="text"
             id="TaskName"
             class="form-control"
-            ngModel
+            [(ngModel)]="task.TaskName"             
             name="TaskName"
-            required>
-        </div>
+            placeholder="TaskName"
+            required>          
+            
+            
+        </div>        
         <div class="form-group">
-          <label for="Method">Method</label>
-            <div class="radio">
-              <label class="radio-inline"><input type="radio" name="Method" id="method" ngModel name="Method" required value="GET" checked="checked">GET</label>
-              <label class="radio-inline"><input type="radio" name="Method" id="method" ngModel name="Method" required value="POST">POST</label>
-              <label class="radio-inline"><input type="radio" name="Method" id="method" ngModel name="Method" required value="PUT">PUT</label>
-              <label class="radio-inline"><input type="radio" name="Method" id="method" ngModel name="Method" required value="DELETE">DELETE</label>          
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="serviceURL">Service URL</label>
+            <label for="ScheduledUrl">Service URL</label>
             <input 
               type="text"
-              id="serviceURL"
+              id="ScheduledUrl"
               class="form-control"
-              ngModel
-              name="serviceURL"
+              name="ScheduledUrl"
+              [(ngModel)]="task.ScheduledUrl"
               required>
           </div>
-          <div class="form-group">
-              <label for="login">Credentials Login</label>
-              <input 
-                type="text"
-                id="login"
-                class="form-control"
-                ngModel
-                name="login">
-          </div>
-          <div class="form-group">
-                <label for="password">Credentials Password</label>
-                <input 
-                  type="text"
-                  id="password"
-                  class="form-control"
-                  ngModel
-                  name="password">
-           </div>
            <div class="form-group">
-              <label for="timeout">Timeout</label>
+              <label for="MaxDuration">Timeout</label>
               <input 
                 type="text"
-                id="timeout"
-                class="form-control"
-                ngModel
-                name="timeout"
+                id="MaxDuration"
+                class="form-control"        
+                [(ngModel)]="task.MaxDuration"  
+                name="MaxDuration"
                 value="0">                
           </div>
           <div class="form-group">
-              <label for="crone_expr">Crone expression</label>
+              <label for="Cron">Crone expression</label>
               <input 
                 type="text"
-                id="crone_expr"
+                id="Cron"
                 class="form-control"
-                ngModel
-                name="crone_expr"
+                [(ngModel)]="task.Cron"   
+                name="Cron"
                 required>                
           </div>
+  
           <div class="form-group">
-              <label for="crone_expr">Header</label>
-              <select class="form-control" id="header" ngModel
-              name="crone_expr" required> 
-                  <option>1</option>
-                  <option>2</option>                  
+              <label for="header">Header</label>
+              <select class="form-control" id="header" name="header" required> 
+                  <option *ngFor="let header of task.Headers">{{header}} </option>                  
                 </select>              
           </div>
           <div class="form-group">
-              <label for="crone_expr">Body</label>
-              <select class="form-control" id="body" ngModel
-              name="body" required> 
-                  <option>1</option>
-                  <option>2</option>                  
-                </select>              
-          </div>
+              <label for="Body">Body</label>
+              <input type="text"
+              class="form-control"
+              id="Body" 
+              [(ngModel)]="task.Body"  
+              name="Body" 
+              required>                 
+          </div>         
           <div class="form-group">
-              <label for="status">Status</label>
-                <div class="radio">
-                  <label class="radio-inline"><input type="radio" name="status" id="status" ngModel name="status" required value="Inactive" checked="checked">Inactive</label>
-                  <label class="radio-inline"><input type="radio" name="status" id="status" ngModel name="status" required value="Active">Active</label>                  
-                </div>
-          </div>  
-          <div class="form-group">
-              <label for="donotrun">Do not run at the same time as</label>
-              <select multiple class="form-control" id="donotrun" ngModel
-              name="donotrun" required> 
-                  <option>Task 1</option>
-                  <option>Task 2</option>                  
-                  <option>Task 3</option>                  
-                  <option>Task 4</option>                  
-                  <option>Task 5</option>                  
+              <label for="ConflictTasks">Do not run at the same time as</label>
+              <select multiple class="form-control" id="ConflictTasks" ngModel
+              name="ConflictTasks" required> 
+              <option *ngFor="let conflictTask of task.ConflictTasks">{{conflictTask}} </option>                  
                 </select>              
           </div>
           <div class="form-group">
               <label for="history">History</label>
-              <select class="form-control" id="history" ngModel
+
+              <select multiple class="form-control" id="history" ngModel
               name="history" required> 
-                  <option>Log 1</option>
-                  <option>Log 2</option>                  
-                  <option>Log 3</option>                  
-                </select>              
-          </div>          
-        <button class="btn btn-primary" type="submit">Submit</button>
-      </form>
-    </div>
-  </div>
+              <option *ngFor="let history of arrayHistory.models">{{history.ResponseStatus}} - {{history.StartDate}} - {{history.Duration}} -  {{history.ResponseBody}}</option>                  
+                </select>                                       
+          </div>               
+        <button class="btn btn-primary" type="submit">Save</button>
+        
+      </form>      
 </div>

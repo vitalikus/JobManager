@@ -3,20 +3,19 @@
 <div class="container">
   <div class="row">
 
-      <form #taskForm="ngForm" (ngSubmit)="onSubmit()">
+      <form #taskForm="ngForm" (ngSubmit)="onSave()" >
         <div class="form-group">
-          <label for="task.TaskName">Task name</label>
+          <label for="TaskName">Task name</label>
           <input 
             type="text"
             id="TaskName"
             class="form-control"
-            [(ngModel)]="task.TaskName"           
-            name="task.TaskName"
-            required>
-            <div [hidden]="task.TaskName.valid"
-     class="alert alert-danger">
-  Task name is required
-</div>
+            [(ngModel)]="task.TaskName"             
+            name="TaskName"
+            placeholder="TaskName"
+            required>          
+            
+            
         </div>        
         <div class="form-group">
             <label for="ScheduledUrl">Service URL</label>
@@ -24,7 +23,6 @@
               type="text"
               id="ScheduledUrl"
               class="form-control"
-              ngModel
               name="ScheduledUrl"
               [(ngModel)]="task.ScheduledUrl"
               required>
@@ -34,8 +32,7 @@
               <input 
                 type="text"
                 id="MaxDuration"
-                class="form-control"
-                ngModel
+                class="form-control"        
                 [(ngModel)]="task.MaxDuration"  
                 name="MaxDuration"
                 value="0">                
@@ -50,6 +47,7 @@
                 name="Cron"
                 required>                
           </div>
+  
           <div class="form-group">
               <label for="header">Header</label>
               <select class="form-control" id="header" name="header" required> 
@@ -57,10 +55,10 @@
                 </select>              
           </div>
           <div class="form-group">
-              <label for="body">Body</label>
+              <label for="Body">Body</label>
               <input type="text"
               class="form-control"
-              id="body" 
+              id="Body" 
               [(ngModel)]="task.Body"  
               name="Body" 
               required>                 
@@ -86,8 +84,10 @@
               name="history" required> 
               <option *ngFor="let history of arrayHistory.models">{{history.ResponseStatus}} - {{history.StartDate}} - {{history.Duration}} -  {{history.ResponseBody}}</option>                  
                 </select>                                       
-          </div>          
-        <button class="btn btn-primary" type="submit">Save</button>
-      </form>
-    </div>
+          </div>       
+          id = {{task._id}} <br>  
+          rev {{task._rev}}
+        <button class="btn btn-primary" (click)="onSave(task)" type="button">Save</button>
+        <button class="btn btn-primary" type="button">Delete</button>
+      </form>      
 </div>

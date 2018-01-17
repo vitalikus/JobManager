@@ -40,6 +40,9 @@ onGet() {
   );
 }
 
+onCreateTask () {
+  this.router.navigate(['tasks/add']);
+}
 sendMeHome() {
   this.router.navigate(['']);
 }

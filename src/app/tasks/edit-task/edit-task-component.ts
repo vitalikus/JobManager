@@ -6,6 +6,7 @@ import { ActivatedRoute, Params  } from '@angular/router';
 
 import { TaskService } from '../task.service/task.service';
 import { HistoryService } from '../../history/history.service/history.service';
+import { Task } from '../task';
 //import { ViewChild } from '@angular/core/src/metadata/di';
 
 @Component({
@@ -16,7 +17,7 @@ import { HistoryService } from '../../history/history.service/history.service';
 export class EditTaskComponent implements OnInit {  
   id: string;
   
-  //task;
+  //task: Task;
   arrayHistory: {Body: string}[]=[];
   editMode = false;
   //tasksService: any;
@@ -30,19 +31,23 @@ export class EditTaskComponent implements OnInit {
     this.route.params.subscribe(this.newMethod());
     console.log (this.id);
   }
+  //"Cron": "",
+  
   task = {
+    "_id": "",
+    "_rev": "",    
+    "TaskName": "",
+    "ScheduledUrl": "",
+    "Headers": {},
     "Body": "",
+    "Cron": "",
+    "ActiveStatus": Boolean,
+    "MaxDuration": 0,
     "ConflictTasks": [
       ""
-    ],
-    "Cron": "",
-    "Headers": {},
-    "MaxDuration": 0,
-    "ScheduledUrl": "",
-    "TaskName": "",
-    "_id": "",
-    "_rev": ""
+    ],     
   }
+
 
   private newMethod(): (value: Params) => void {
     return params => this.id = params['id'];
@@ -53,10 +58,9 @@ export class EditTaskComponent implements OnInit {
     .subscribe(
       (params: Params) => {
         this.id = params['id'];
-        this.editMode = params['id'] != null;
+        //this.taskeditMode = params['id'] != null;
       }
     ); 
-
 
     this.tasksService.getTaskById(this.id).subscribe(
       (response: Response) => {
@@ -67,7 +71,7 @@ export class EditTaskComponent implements OnInit {
      }
     );
 
-    this.historyService.getHistoryByTaskId(this.task._id).subscribe(
+    this.historyService.getHistoryByTaskId(this.id).subscribe(
       (response: Response) => {
         this.arrayHistory = response.json();
      },
@@ -77,10 +81,26 @@ export class EditTaskComponent implements OnInit {
     );
   }
 
-  onSave () {
-    console.log ("Task.Id = "+ this.task._id);
-    console.log ("Task.rev = "+ this.task._rev);
-   // this.tasksService.updateTask(this.task._id, this.task._rev);
-    this.saved = true;    
+  onSave (taskForm) {
+    this.saved = true;   
+    console.log ("saved = " + this.saved);     
+    console.log ("Task name =" + this.task.TaskName);
+    console.log ("Task _id=" + this.task._id);
+    console.log ("Task _rev=" + this.task._rev);
+    console.log ("Task ScheduledUrl=" + this.task.ScheduledUrl);
+    console.log ("Task Headers=" + this.task.Headers);
+    console.log ("Task cron=" + this.task.Cron);
+    console.log ("Task ActiveStatus=" + this.task.ActiveStatus);
+
+    console.log ("Task MaxDuration=" + this.task.MaxDuration);
+    console.log ("Task ConflictTasks=" + this.task.ConflictTasks);
+    
+    this.tasksService.updateTask(this.task).subscribe(
+      (response: Response) => {
+        console.log(response);
+        //this.resetTask();
+      },
+      (error) => console.log(error)
+    );        
   }
 }
