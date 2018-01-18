@@ -4,8 +4,8 @@ import { Response } from '@angular/http';
 import { ActivatedRoute, Params  } from '@angular/router';
 
 import { TaskService } from '../task.service/task.service';
-import { HistoryService } from '../../history/history.service/history.service';
-//import { ViewChild } from '@angular/core/src/metadata/di';
+import { Task } from '../task';
+
 
 @Component({
   selector: 'app-add-task',
@@ -20,7 +20,7 @@ export class AddTaskComponent implements OnInit {
   //id;
   
   constructor(private tasksService: TaskService,
-    private historyService: HistoryService,
+    
     private route: ActivatedRoute) { 
       this.route.params.subscribe();
       //console.log (this.id);
@@ -29,13 +29,11 @@ export class AddTaskComponent implements OnInit {
   task = {    
     "TaskName": "",
     "ScheduledUrl": "",
-    "Headers": {},
+     //"Headers": {},
     "Body": "",
     "Cron": "",    
     "MaxDuration": 0,
-    "ConflictTasks": [
-      ""
-    ],     
+    //"ConflictTasks": [""],     
   }
 
   ngOnInit() {
@@ -51,13 +49,14 @@ export class AddTaskComponent implements OnInit {
     console.log ("saved = " + this.submitted);     
     console.log ("Task name =" + this.task.TaskName);
     console.log ("Task ScheduledUrl=" + this.task.ScheduledUrl);
-    console.log ("Task Headers=" + this.task.Headers);
+    //console.log ("Task Headers=" + this.task.Headers);
     console.log ("Task cron=" + this.task.Cron);
     console.log ("Task MaxDuration=" + this.task.MaxDuration);
-    console.log ("Task ConflictTasks=" + this.task.ConflictTasks);
+    //console.log ("Task ConflictTasks=" + this.task.ConflictTasks);
     
-    this.tasksService.createTask().subscribe(
+    this.tasksService.createTask(this.task).subscribe(
       (response: Response) => {
+        console.log ("Task successfully added.");
         console.log(response);
         //this.resetTask();
       },
@@ -65,5 +64,4 @@ export class AddTaskComponent implements OnInit {
     ); 
     //this.signupForm.reset();
   }
-
 }

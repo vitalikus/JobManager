@@ -1,5 +1,5 @@
 
-<h3>Task Details</h3>
+<h3>Editing the task details</h3>
 <div class="container">
   <div class="row">
 
@@ -85,9 +85,7 @@
               <option *ngFor="let history of arrayHistory.models">{{history.ResponseStatus}} - {{history.StartDate}} - {{history.Duration}} -  {{history.ResponseBody}}</option>                  
                 </select>                                       
           </div>       
-          id = {{task._id}} <br>  
-          rev {{task._rev}}
         <button class="btn btn-primary" (click)="onSave(task)" type="button">Save</button>
-        <button class="btn btn-primary" type="button">Delete</button>
+        <button class="btn btn-primary" (click)="onDelete(task._id)" type="button">Delete</button>
       </form>      
 </div>

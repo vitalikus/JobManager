@@ -1,9 +1,9 @@
 
-<h3>Task Details</h3>
+<h3>Creation a new task</h3>
 <div class="container">
   <div class="row">
 
-      <form #taskForm="ngForm" (ngSubmit)="onSave()" >
+      <form #addForm="ngForm" (ngSubmit)="onSubmit()" >
         <div class="form-group">
           <label for="TaskName">Task name</label>
           <input 
@@ -13,9 +13,7 @@
             [(ngModel)]="task.TaskName"             
             name="TaskName"
             placeholder="TaskName"
-            required>          
-            
-            
+            required>                               
         </div>        
         <div class="form-group">
             <label for="ScheduledUrl">Service URL</label>
@@ -47,13 +45,6 @@
                 name="Cron"
                 required>                
           </div>
-  
-          <div class="form-group">
-              <label for="header">Header</label>
-              <select class="form-control" id="header" name="header" required> 
-                  <option *ngFor="let header of task.Headers">{{header}} </option>                  
-                </select>              
-          </div>
           <div class="form-group">
               <label for="Body">Body</label>
               <input type="text"
@@ -63,21 +54,6 @@
               name="Body" 
               required>                 
           </div>         
-          <div class="form-group">
-              <label for="ConflictTasks">Do not run at the same time as</label>
-              <select multiple class="form-control" id="ConflictTasks" ngModel
-              name="ConflictTasks" required> 
-              <option *ngFor="let conflictTask of task.ConflictTasks">{{conflictTask}} </option>                  
-                </select>              
-          </div>
-          <div class="form-group">
-              <label for="history">History</label>
-
-              <select multiple class="form-control" id="history" ngModel
-              name="history" required> 
-              <option *ngFor="let history of arrayHistory.models">{{history.ResponseStatus}} - {{history.StartDate}} - {{history.Duration}} -  {{history.ResponseBody}}</option>                  
-                </select>                                       
-          </div>               
         <button class="btn btn-primary" type="submit">Save</button>
         
       </form>      

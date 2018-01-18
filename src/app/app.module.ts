@@ -22,7 +22,7 @@ const appRoutes: Routes = [
  { path: '', component: HomeComponent},
  { path: 'tasks', component: ViewTasksComponent}, 
  { path: 'tasks/:id', component: EditTaskComponent},
- { path: 'tasks/add', component: AddTaskComponent},
+ { path: 'addtask', component: AddTaskComponent},
  { path: 'history', component: ListHistoriesComponent}
 ];
 

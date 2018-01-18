@@ -29,5 +29,4 @@ export class ListHistoriesComponent implements OnInit {
      }
     );
   }
-
 }

@@ -38,14 +38,12 @@ export class EditTaskComponent implements OnInit {
     "_rev": "",    
     "TaskName": "",
     "ScheduledUrl": "",
-    "Headers": {},
+    //"Headers": {},
     "Body": "",
     "Cron": "",
     "ActiveStatus": Boolean,
-    "MaxDuration": 0,
-    "ConflictTasks": [
-      ""
-    ],     
+    "MaxDuration": 0
+    //"ConflictTasks": [""],     
   }
 
 
@@ -54,6 +52,7 @@ export class EditTaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log ("ngOnInit edit-task");
     this.route.params
     .subscribe(
       (params: Params) => {
@@ -81,26 +80,37 @@ export class EditTaskComponent implements OnInit {
     );
   }
 
-  onSave (taskForm) {
+  onSave () {
     this.saved = true;   
     console.log ("saved = " + this.saved);     
     console.log ("Task name =" + this.task.TaskName);
     console.log ("Task _id=" + this.task._id);
     console.log ("Task _rev=" + this.task._rev);
-    console.log ("Task ScheduledUrl=" + this.task.ScheduledUrl);
-    console.log ("Task Headers=" + this.task.Headers);
+    //console.log ("Task ScheduledUrl=" + this.task.ScheduledUrl);
+    //console.log ("Task Headers=" + this.task.Headers);
     console.log ("Task cron=" + this.task.Cron);
-    console.log ("Task ActiveStatus=" + this.task.ActiveStatus);
-
-    console.log ("Task MaxDuration=" + this.task.MaxDuration);
-    console.log ("Task ConflictTasks=" + this.task.ConflictTasks);
+    //console.log ("Task ActiveStatus=" + this.task.ActiveStatus);
+    //console.log ("Task MaxDuration=" + this.task.MaxDuration);
+    //console.log ("Task ConflictTasks=" + this.task.ConflictTasks);
     
     this.tasksService.updateTask(this.task).subscribe(
       (response: Response) => {
+        console.log ("Task successfully saved.");
         console.log(response);
-        //this.resetTask();
       },
       (error) => console.log(error)
     );        
+  }
+
+  onDelete ()  {
+    console.log ("OnDelete-> Task _id=" + this.id);
+    
+    this.tasksService.deleteTask(this.id).subscribe(
+      (response: Response) => {
+        console.log ("Task successfully deleted.");
+        console.log(response);        
+      },
+      (error) => console.log(error)
+    );  
   }
 }

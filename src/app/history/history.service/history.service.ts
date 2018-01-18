@@ -15,6 +15,6 @@ export class HistoryService  {
   }
 
   getHistoryByTaskId(TaskId: string) {    
-    return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/histories/'+TaskId, {headers: this.headers});
+    return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/history/task/'+TaskId, {headers: this.headers});
   }
 }
