@@ -21,7 +21,7 @@ import { HistoryService } from './history/history.service/history.service';
 const appRoutes: Routes = [
  { path: '', component: HomeComponent},
  { path: 'tasks', component: ViewTasksComponent}, 
- { path: 'tasks/:id', component: EditTaskComponent},
+ { path: 'task/:id', component: EditTaskComponent},
  { path: 'addtask', component: AddTaskComponent},
  { path: 'history', component: ListHistoriesComponent}
 ];
@@ -35,7 +35,6 @@ const appRoutes: Routes = [
     HomeComponent,
     HistoryComponent,
     ListHistoriesComponent
-    //TaskService
   ],
   imports: [
     BrowserModule,
@@ -43,7 +42,6 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
- // exports: [RouterModule],
   providers: [TaskService, HistoryService],
   bootstrap: [AppComponent]
 })

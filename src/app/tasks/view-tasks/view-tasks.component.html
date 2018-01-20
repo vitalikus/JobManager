@@ -12,8 +12,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let task of tasksArray.models">
-          <td><a routerLink="{{task._id}}">{{task.TaskName}}</a></td>
-          <td><a routerLink="{{task._id}}">{{task.ActiveStatus}}</a></td>
+          <td><a [routerLink]="['/task',task._id]">{{task.TaskName}}</a></td>
+          <td><a [routerLink]="['/task',task._id]">{{task.ActiveStatus}}</a></td>
           <td>Idle</td>
           <td>{{ getLastRun(task.TaskName) }}</td>
         </tr>       
