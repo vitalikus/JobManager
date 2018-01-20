@@ -4,8 +4,7 @@
       <thead>
         <tr>
           <th>Task Id</th>
-          <th>Id</th>
-          <th>Rev</th>          
+          <th>Id</th>             
           <th>Response Status</th>
           <th>Start date</th>
           <th>Duration</th>
@@ -15,8 +14,7 @@
       <tbody>
         <tr *ngFor="let history of historyArray.models">
             <td>{{history.taskId}}</td>
-          <td><a routerLink="{{history._id}}">{{history._id}}</a></td>
-          <td>{{history._rev}}</td>          
+          <td><a routerLink="{{history._id}}">{{history._id}}</a></td>            
           <td>{{history.ResponseStatus}}</td>
           <td>{{history.StartDate}}</td>          
           <td>{{history.Duration}}</td>          
