@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-//import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -9,7 +8,7 @@ export class TaskService  {
   constructor(private http: Http) {}
   
   headers = new Headers({'Content-Type': 'application/json'});
-//"Cron": "",
+
   task = {    
     "_id": "",
     "_rev":"", 
@@ -21,8 +20,6 @@ export class TaskService  {
     "MaxDuration": 0
     //"ConflictTasks": [""],     
   }
-
-
 
   getTasks() {
     return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/tasks', {headers: this.headers});
@@ -36,11 +33,15 @@ export class TaskService  {
     return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/status/'+id, {headers: this.headers});
   }
 
-  getTaskDisableById(id: string) {    
+  setTaskDisable(id: string) {    
     return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/disable/'+id, {headers: this.headers});
   }
 
-  getTaskRunById(id: string) {    
+  setTaskToScheduler(id: string) {    
+    return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/submit/'+id, {headers: this.headers});
+  }
+
+  runTask(id: string) {    
     return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/run/'+id, {headers: this.headers});
   }
 
@@ -50,11 +51,10 @@ export class TaskService  {
   }
   
   updateTask(task) {  
-    return this.http.put ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/update/'+task._id + '/'+task._rev, task, {headers: this.headers});
+    return this.http.put ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/update/'+task._id + '/'+task._rev, JSON.stringify(task), {headers: this.headers});
   }
 
   deleteTask(id: string) {    
     return this.http.delete ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/delete/'+id, {headers: this.headers});
   }
-
 }

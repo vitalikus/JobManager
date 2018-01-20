@@ -65,10 +65,7 @@
           </div>
           <div class="form-group">
               <label for="ActiveStatus">Status</label>
-                <div class="radio">
-                  <label class="radio-inline"><input type="radio" id="ActiveStatus" [(ngModel)]="task.ActiveStatus" name="ActiveStatus" required [value]=false>Inactive</label>
-                  <label class="radio-inline"><input type="radio"id="ActiveStatus" [(ngModel)]="task.ActiveStatus" name="ActiveStatus" required [value]=true>Active</label>                  
-                </div>
+                {{task.ActiveStatus}}
           </div>  
           <div class="form-group">
               <label for="ConflictTasks">Do not run at the same time as</label>
@@ -87,5 +84,8 @@
           </div>       
         <button class="btn btn-primary" (click)="onSave(task)" type="button">Save</button>
         <button class="btn btn-primary" (click)="onDelete(task._id)" type="button">Delete</button>
+        <button class="btn btn-primary" (click)="onRun(task._id)" type="button">Run</button>
+        <button class="btn btn-primary" (click)="onDisabled(task._id)" type="button">Disabled</button>
+        <button class="btn btn-primary" (click)="onSubmitToScheduler(task._id)" type="button">Submit to the scheduler</button>
       </form>      
 </div>

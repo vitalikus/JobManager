@@ -82,7 +82,7 @@ export class EditTaskComponent implements OnInit {
 
   onSave () {
     this.saved = true;   
-    console.log ("saved = " + this.saved);     
+    console.log ("OnSave = " + this.saved);     
     console.log ("Task name =" + this.task.TaskName);
     console.log ("Task _id=" + this.task._id);
     console.log ("Task _rev=" + this.task._rev);
@@ -108,6 +108,43 @@ export class EditTaskComponent implements OnInit {
     this.tasksService.deleteTask(this.id).subscribe(
       (response: Response) => {
         console.log ("Task successfully deleted.");
+        console.log(response);        
+      },
+      (error) => console.log(error)
+    );  
+  }
+
+  onRun ()  {
+    console.log ("OnRun-> Task _id=" + this.id);
+    
+    this.tasksService.runTask(this.id).subscribe(
+      (response: Response) => {
+        console.log ("Task successfully had run.");
+        console.log(response);        
+      },
+      (error) => console.log(error)
+    );  
+  }
+
+  onDisabled ()  {
+    console.log ("OnDisabled-> Task _id=" + this.id);
+    
+    this.tasksService.setTaskDisable(this.id).subscribe(
+      (response: Response) => {
+        console.log ("Task successfully had set to disabled.");
+        console.log(response);        
+      },
+      (error) => console.log(error)
+    );  
+  }
+
+  onSubmitToScheduler ()
+  {
+    console.log ("onSubmitToScheduler-> Task _id=" + this.id);
+    
+    this.tasksService.setTaskToScheduler(this.id).subscribe(
+      (response: Response) => {
+        console.log ("Task successfully had submitted to the scheduler.");
         console.log(response);        
       },
       (error) => console.log(error)
