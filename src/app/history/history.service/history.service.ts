@@ -10,8 +10,13 @@ export class HistoryService  {
   
   headers = new Headers({'Content-Type': 'application/json'});
 
-  getHistories() {
-    return this.http.get ('https://ldd-scheduler-test.mybluemix.net//api/scheduler/histories', {headers: this.headers});
+  getHistories(Token: string) {
+    let url =  'https://ldd-scheduler-test.mybluemix.net/api/scheduler/histories';
+    let urlToken = '/'+ Token;
+
+    if (Token != "") { url = url+ urlToken}
+
+    return this.http.get (url, {headers: this.headers});    
   }
 
   getHistoryByTaskId(TaskId: string) {    

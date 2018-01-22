@@ -13,8 +13,17 @@ import { HistoryService } from '../../history/history.service/history.service';
 })
 export class ViewTasksComponent implements OnInit {
   
-  tasksArray: {Body: string}[]=[];
-  lastHistory: {Body: string}[]=[];
+  tasksArray: {pageToken: string, models: {}[]};// {Body: string}[]=[];
+  arrayHistory: {pageToken: string, models: [{"taskId": "",
+  "taskName": "",
+  "_id": "",
+  "_rev": "",
+  "ResponseStatus": "",
+  "StartDate": "",
+  "Duration": 0,
+  "ResponseBody": ""}]}; // {Body: string}[]=[];
+  
+  // {pageToken: string, models: {}[]};
   constructor(private tasksService: TaskService,
               private historyService: HistoryService,
               private route: ActivatedRoute,
@@ -23,24 +32,32 @@ export class ViewTasksComponent implements OnInit {
               }
 
   ngOnInit() {
-     this.tasksService.getTasks().subscribe(
-      (response: Response) => {
-        this.tasksArray = response.json();
-     },
-     (error) => {
-       console.log(error)
-     }
-    );
+    this.onGetFirstPage ();
   }
  
   onGet() {
-    this.tasksService.getTasks().subscribe(
+    this.onGetFirstPage ();
+  }
+
+  onGetFirstPage () {
+    this.tasksService.getTasks("").subscribe(
       (response: Response) => {
         this.tasksArray = response.json();
       },
     (error) => {
        console.log(error)
     }
+    );
+  }
+
+  onGetNextPage() {
+    this.tasksService.getTasks(this.tasksArray.pageToken).subscribe(
+      (response: Response) => {
+        this.tasksArray = response.json();
+        },
+      (error) => {
+        console.log(error)
+      }
     );
   }
 
@@ -51,20 +68,34 @@ export class ViewTasksComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+ 
+
   public getLastRun(TaskId: string) {
-   //return TaskId;
-    /*
+   return TaskId;
+   /*
+   let lastHistory: {
+    "taskId": "",
+      "taskName": "",
+      "_id": "",
+      "_rev": "",
+      "ResponseStatus": "",
+      "StartDate": "",
+      "Duration": 0,
+      "ResponseBody": ""
+  }
+    
     this.historyService.getHistoryByTaskId (TaskId).subscribe(
      (response: Response) => {
-       this.lastHistory = response.json();
-       
+       this.arrayHistory = response.json();       
     },
     (error) => {
       console.log(error)
     }
    );
-   return this.lastHistory.models.StartDate;
+   lastHistory = this.arrayHistory.models[0];
+   return lastHistory.StartDate;   
    */
- }
+  
+ } 
  
 }

@@ -14,6 +14,7 @@ import { TaskService } from './tasks/task.service/task.service';
 import { HistoryComponent } from './history/history.component';
 import { ListHistoriesComponent } from './history/list-histories/list-histories.component';
 import { HistoryService } from './history/history.service/history.service';
+import { TaskComponent } from './tasks/task/task.component';
 
 //import { TaskService } from './task.service/task.service';
 // children: [
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     ViewTasksComponent,
     HomeComponent,
     HistoryComponent,
-    ListHistoriesComponent
+    ListHistoriesComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,

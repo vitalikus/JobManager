@@ -1,22 +1,23 @@
 <h3>Task View</h3>
 <button class="btn btn-primary" (click)="onCreateTask()">Add Task</button>
+<button class="btn btn-primary" (click)="onGetFirstPage()">First Page</button>
+<button class="btn btn-primary" (click)="onGetNextPage()">Next Page</button>
+
 <div class="container">
     <table class="table">
       <thead>
         <tr>
           <th>Task name</th>
-          <th>Active</th>
-          <th>Running</th>
+          <th>Status</th>          
           <th>Last run</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let task of tasksArray.models">
           <td><a [routerLink]="['/task',task._id]">{{task.TaskName}}</a></td>
-          <td><a [routerLink]="['/task',task._id]">{{task.ActiveStatus}}</a></td>
-          <td>Idle</td>
-          <td>{{ getLastRun(task.TaskName) }}</td>
+          <td><a [routerLink]="['/task',task._id]">{{task.ActiveStatus}}</a></td>          
+          <td>no info</td>
         </tr>       
       </tbody>
-    </table>
+    </table>    
 </div>

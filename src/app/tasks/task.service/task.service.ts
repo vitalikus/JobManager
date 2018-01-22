@@ -21,8 +21,13 @@ export class TaskService  {
     //"ConflictTasks": [""],     
   }
 
-  getTasks() {
-    return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/tasks', {headers: this.headers});
+  getTasks(Token: string) {
+    let url =  'https://ldd-scheduler-test.mybluemix.net/api/scheduler/tasks';
+    let urlToken = '/'+ Token;
+
+    if (Token != "") { url = url+ urlToken}
+
+    return this.http.get (url, {headers: this.headers});
   }
 
   getTaskById(id: string) {    

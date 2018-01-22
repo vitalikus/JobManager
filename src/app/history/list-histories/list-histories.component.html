@@ -1,10 +1,11 @@
 <h3>Histories View</h3>
 <div class="container">
+    <button class="btn btn-primary" (click)="onGetFirstPage()">First Page</button>
+    <button class="btn btn-primary" (click)="onGetNextPage()">Next Page</button>
     <table class="table">
       <thead>
         <tr>
-          <th>Task Id</th>
-          <th>Id</th>             
+          <th>Task name</th>
           <th>Response Status</th>
           <th>Start date</th>
           <th>Duration</th>
@@ -12,9 +13,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let history of historyArray.models">
-            <td>{{history.taskId}}</td>
-          <td><a routerLink="{{history._id}}">{{history._id}}</a></td>            
+        <tr *ngFor="let history of historyArray.models">            
+          <td><a routerLink="{{history._id}}">{{history.taskId}}/{{history.taskName}}</a></td>            
           <td>{{history.ResponseStatus}}</td>
           <td>{{history.StartDate}}</td>          
           <td>{{history.Duration}}</td>          

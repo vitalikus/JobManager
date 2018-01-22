@@ -12,7 +12,7 @@ import { HistoryService } from '../history.service/history.service';
 })
 export class ListHistoriesComponent implements OnInit {
 
-  historyArray: {Body: string}[]=[];
+  historyArray: {pageToken: string, models: {}[]};//{Body: string}[]=[];
   constructor(private historyService: HistoryService,
               private route: ActivatedRoute,
               private router: Router) { 
@@ -20,13 +20,32 @@ export class ListHistoriesComponent implements OnInit {
               }
 
   ngOnInit() {
-     this.historyService.getHistories().subscribe(
+    this.onGetFirstPage ();
+  }
+
+  onGetFirstPage () {
+    this.historyService.getHistories("").subscribe(
       (response: Response) => {
         this.historyArray = response.json();
-     },
-     (error) => {
+      },
+    (error) => {
        console.log(error)
-     }
+    }
     );
+  }
+
+  onGetNextPage () {
+    this.historyService.getHistories(this.historyArray.pageToken).subscribe(
+      (response: Response) => {
+        this.historyArray = response.json();
+      },
+    (error) => {
+       console.log(error)
+    }
+    );
+  }
+
+  getTaskname (taskId) {
+    
   }
 }
