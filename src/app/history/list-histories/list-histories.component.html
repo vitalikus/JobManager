@@ -1,7 +1,5 @@
 <h3>Histories View</h3>
-<div class="container">
-    <button class="btn btn-primary" (click)="onGetFirstPage()">First Page</button>
-    <button class="btn btn-primary" (click)="onGetNextPage()">Next Page</button>
+<div class="container">    
     <table class="table">
       <thead>
         <tr>
@@ -22,4 +20,10 @@
         </tr>       
       </tbody>
     </table>
+    <nav aria-label="Task history navigation">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" (click)="onGetFirstPage()">First page</a></li>      
+          <li class="page-item"><a class="page-link" (click)="onGetNextPage()">Next page</a></li>
+        </ul>
+      </nav>
 </div>

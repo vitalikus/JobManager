@@ -3,19 +3,14 @@
 <hr>
 <div class="container">
     <div class="row">      
-        <ul class="nav nav-tabs">
-          <li role="presentation"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{exact: true}">
-            <a routerLink="/">Home</a>
-          </li>
-          <li role="presentation"
+        <ul class="nav nav-tabs">         
+          <li class="nav-item"
               routerLinkActive="active">
-            <a routerLink="tasks">Tasks</a>            
+            <a class="nav-link" role="tab" id="tasks-tab" routerLink="tasks">Tasks</a>            
           </li>
-          <li role="presentation"
+          <li class="nav-item"
               routerLinkActive="active">
-            <a routerLink="/history">History</a>
+            <a class="nav-link" role="tab" id="history-tab" routerLink="/history">History</a>
           </li>
         </ul>      
     </div>

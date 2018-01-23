@@ -1,13 +1,13 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-//import { NgForm } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Response } from '@angular/http';
 import { ActivatedRoute, Params  } from '@angular/router';
-
+/* 
+Custom components
+*/
 import { TaskService } from '../task.service/task.service';
 import { HistoryService } from '../../history/history.service/history.service';
 import { Task } from '../task';
-//import { ViewChild } from '@angular/core/src/metadata/di';
 
 @Component({
   selector: 'app-edit-task',
@@ -15,11 +15,13 @@ import { Task } from '../task';
   styleUrls: ['./edit-task-component.css']
 })
 export class EditTaskComponent implements OnInit {  
+  taskForm: FormGroup;
   id: string;
   
   //task: Task;
   arrayHistory: {Body: string}[]=[];
   editMode = false;
+  
   //tasksService: any;
   //@ViewChild('f') signupForm: NgForm;
 
@@ -52,6 +54,13 @@ export class EditTaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.taskForm = new FormGroup ({
+      TaskName: new FormControl ('', [
+        Validators.minLength(5),
+        Validators.required
+      ])
+    });
+
     console.log ("ngOnInit edit-task");
     this.route.params
     .subscribe(
