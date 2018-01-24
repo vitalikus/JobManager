@@ -24,6 +24,7 @@ const appRoutes: Routes = [
  { path: '', component: ViewTasksComponent},
  { path: 'tasks', component: ViewTasksComponent}, 
  { path: 'task/:id', component: EditTaskComponent},
+ { path: 'task/:id/edit', component: EditTaskComponent},
  { path: 'addtask', component: AddTaskComponent},
  { path: 'history', component: ListHistoriesComponent}
 ];

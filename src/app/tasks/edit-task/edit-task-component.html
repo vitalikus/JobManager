@@ -4,16 +4,16 @@
   <div class="row">
 
       <form #taskForm="ngForm" (ngSubmit)="onSave()" >
-          <button class="btn btn-primary" (click)="onClose()" type="button">Close</button>
+          <button class="btn btn-secondary" (click)="onClose()" type="button">Cancel</button>
           <button [disabled]="TaskName.invalid || ScheduledUrl.invalid || Cron.invalid" class="btn btn-primary" (click)="onSave(task)" type="button">Save</button>          
-          <button  class="btn btn-primary" (click)="onDisabled(task._id)" type="button">Disabled</button>
-          <button [disabled]="TaskName.invalid || ScheduledUrl.invalid || Cron.invalid" class="btn btn-primary" (click)="onRun(task._id)" type="button">Run</button>          
-          <button [disabled]="TaskName.invalid || ScheduledUrl.invalid || Cron.invalid" class="btn btn-primary" (click)="onSubmitToScheduler(task._id)" type="button">Submit to the scheduler</button>
-          <button class="btn btn-primary" (click)="onDelete(task._id)" type="button">Delete</button>
+          <button class="btn btn-warning" (click)="onDisabled(task._id)" type="button">Disabled</button>
+          <button [disabled]="TaskName.invalid || ScheduledUrl.invalid || Cron.invalid" class="btn btn-success" (click)="onRun(task._id)" type="button">Run</button>          
+          <button [disabled]="TaskName.invalid || ScheduledUrl.invalid || Cron.invalid" class="btn btn-success" (click)="onSubmitToScheduler(task._id)" type="button">Submit to the scheduler</button>
+          <button class="btn btn-danger" (click)="onDelete(task._id)" type="button">Delete</button>
 <p>          
           <div class="container">
         <div class="form-group">
-          <label for="TaskName">Task name</label>
+          <label for="TaskName">NAME</label>
           <input 
             type="text"            
             id="TaskName"
@@ -29,7 +29,7 @@
         </div>        
         
         <div class="form-group">
-            <label for="ScheduledUrl">Service URL</label>
+            <label for="ScheduledUrl">SERVICE URL</label>
             <input 
               type="url"
               id="ScheduledUrl"
@@ -41,11 +41,11 @@
               pattern ="https?://.+">
               <div [hidden]="ScheduledUrl.valid || ScheduledUrl.untouched" class="alert alert-danger">
                   Scheduled Url is required.<br>
-                  Sample: http://domain.com/path_to_task
+                  Sample: http://subdomain.domain.com/path_to_task
                 </div> 
           </div>
            <div class="form-group">
-              <label for="MaxDuration">Timeout</label>
+              <label for="MaxDuration">TIMEOUT</label>
               <input 
                 type="text"
                 id="MaxDuration"
@@ -55,7 +55,7 @@
                 value="0">                
           </div>
           <div class="form-group">
-              <label for="Cron">Crone expression</label>
+              <label for="Cron">CRONE *</label>
               <input 
                 type="text"
                 id="Cron"
@@ -70,13 +70,13 @@
           </div>
   
           <div class="form-group">
-              <label for="header">Header</label>
+              <label for="header">HEADER</label>
               <select class="form-control" id="header" name="header" required> 
                   <option *ngFor="let header of task.Headers">{{header}} </option>                  
                 </select>              
           </div>
           <div class="form-group">
-              <label for="Body">Body</label>
+              <label for="Body">BODY</label>
               <textarea  class="form-control"
               id="Body" 
               [(ngModel)]="task.Body"  
@@ -84,8 +84,15 @@
               required rows="3"></textarea>                 
           </div>
           <div class="form-group">
-              <label for="ActiveStatus">Status</label>
-                {{task.ActiveStatus}}
+              <label for="ActiveStatus">STATUS</label>
+              <input 
+              type="checkbox"
+              id="ActiveStatus"
+              class="form-control"        
+              [(ngModel)]="task.ActiveStatus"  
+              name="ActiveStatus"
+              disabled>  
+              
           </div>  
           <div class="form-group">
               <label for="ConflictTasks">Do not run at the same time as</label>
@@ -102,7 +109,7 @@
   <p>
       <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
               [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-        Task history 
+        TASK HISTORY 
       </button>
     </p>
     <div id="collapseExample" [ngbCollapse]="isCollapsed">
