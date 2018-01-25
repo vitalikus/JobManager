@@ -2,9 +2,8 @@
 <h3>Editing the task details</h3>
 <div class="container">
   <div class="row">
-
       <form #taskForm="ngForm" (ngSubmit)="onSave()" >
-          <button class="btn btn-secondary" (click)="onClose()" type="button">Cancel</button>
+          <button class="btn btn-secondary" (click)="onCancel()" type="button">Cancel</button>
           <button [disabled]="TaskName.invalid || ScheduledUrl.invalid || Cron.invalid" class="btn btn-primary" (click)="onSave(task)" type="button">Save</button>          
           <button class="btn btn-warning" (click)="onDisabled(task._id)" type="button">Disabled</button>
           <button [disabled]="TaskName.invalid || ScheduledUrl.invalid || Cron.invalid" class="btn btn-success" (click)="onRun(task._id)" type="button">Run</button>          
@@ -26,8 +25,7 @@
             <div [hidden]="TaskName.valid || TaskName.untouched" class="alert alert-danger">
               Task name is required
             </div>                                         
-        </div>        
-        
+        </div>                
         <div class="form-group">
             <label for="ScheduledUrl">SERVICE URL</label>
             <input 

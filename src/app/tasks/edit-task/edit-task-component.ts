@@ -1,13 +1,14 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Response } from '@angular/http';
-import { ActivatedRoute, Params  } from '@angular/router';
+import { ActivatedRoute, Router, Params  } from '@angular/router';
 /* 
 Custom components
 */
 import { TaskService } from '../task.service/task.service';
 import { HistoryService } from '../../history/history.service/history.service';
 import { Task } from '../task';
+//import { Router } from '@angular/router/src/router';
 
 @Component({
   selector: 'app-edit-task',
@@ -29,7 +30,8 @@ export class EditTaskComponent implements OnInit {
   
   constructor(private tasksService: TaskService,
               private historyService: HistoryService,
-              private route: ActivatedRoute) { 
+              private route: ActivatedRoute,
+              private router: Router) { 
     this.route.params.subscribe(this.newMethod());
     console.log (this.id);
   }
@@ -158,5 +160,9 @@ export class EditTaskComponent implements OnInit {
       },
       (error) => console.log(error)
     );  
+  }
+
+  onCancel () {
+    this.router.navigate(['tasks']);//, {relativeTo: this.route});
   }
 }
