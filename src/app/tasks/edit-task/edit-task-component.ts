@@ -149,8 +149,7 @@ export class EditTaskComponent implements OnInit {
     );  
   }
 
-  onSubmitToScheduler ()
-  {
+  onSubmitToScheduler () {
     console.log ("onSubmitToScheduler-> Task _id=" + this.id);
     
     this.tasksService.setTaskToScheduler(this.id).subscribe(

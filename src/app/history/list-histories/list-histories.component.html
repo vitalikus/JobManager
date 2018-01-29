@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let history of historyArray.models">            
-          <td><a routerLink="{{history._id}}">{{history.taskId}}/{{history.taskName}}</a></td>            
+          <td>{{history.taskName}}</td>            
           <td>{{history.ResponseStatus}}</td>
           <td>{{history.StartDate}}</td>          
           <td>{{history.Duration}}</td>          
