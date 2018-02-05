@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { TableModule }  from 'primeng/table';
+
 import { TaskService } from '../task.service/task.service';
 import { HistoryService } from '../../history/history.service/history.service';
 //import { HistoryService } from '../history/history.service/history.service';
