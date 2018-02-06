@@ -7,7 +7,7 @@ Custom components
 */
 import { TaskService } from '../task.service/task.service';
 import { HistoryService } from '../../history/history.service/history.service';
-import { Task } from '../task';
+//import { Task } from '../task';
 //import { Router } from '@angular/router/src/router';
 
 @Component({
@@ -71,7 +71,7 @@ export class EditTaskComponent implements OnInit {
         //this.taskeditMode = params['id'] != null;
       }
     ); 
-
+/*
     this.tasksService.getTaskById(this.id).subscribe(
       (response: Response) => {
         this.task = response.json();
@@ -80,7 +80,7 @@ export class EditTaskComponent implements OnInit {
        console.log(error)
      }
     );
-
+*/
     this.historyService.getHistoryByTaskId(this.id).subscribe(
       (response: Response) => {
         this.arrayHistory = response.json();
@@ -103,31 +103,33 @@ export class EditTaskComponent implements OnInit {
     //console.log ("Task ActiveStatus=" + this.task.ActiveStatus);
     //console.log ("Task MaxDuration=" + this.task.MaxDuration);
     //console.log ("Task ConflictTasks=" + this.task.ConflictTasks);
-    
+    /*
     this.tasksService.updateTask(this.task).subscribe(
       (response: Response) => {
         console.log ("Task successfully saved.");
         console.log(response);
       },
       (error) => console.log(error)
-    );        
+    );
+    */        
   }
 
   onDelete ()  {
     console.log ("OnDelete-> Task _id=" + this.id);
-    
+    /*
     this.tasksService.deleteTask(this.id).subscribe(
       (response: Response) => {
         console.log ("Task successfully deleted.");
         console.log(response);        
       },
       (error) => console.log(error)
-    );  
+    );
+    */  
   }
 
   onRun ()  {
     console.log ("OnRun-> Task _id=" + this.id);
-    
+    /*
     this.tasksService.runTask(this.id).subscribe(
       (response: Response) => {
         console.log ("Task successfully had run.");
@@ -135,23 +137,24 @@ export class EditTaskComponent implements OnInit {
       },
       (error) => console.log(error)
     );  
+    */
   }
 
   onDisabled ()  {
     console.log ("OnDisabled-> Task _id=" + this.id);
-    
+    /*
     this.tasksService.setTaskDisable(this.id).subscribe(
       (response: Response) => {
         console.log ("Task successfully had set to disabled.");
         console.log(response);        
       },
       (error) => console.log(error)
-    );  
+    );  */
   }
 
   onSubmitToScheduler () {
     console.log ("onSubmitToScheduler-> Task _id=" + this.id);
-    
+    /*
     this.tasksService.setTaskToScheduler(this.id).subscribe(
       (response: Response) => {
         console.log ("Task successfully had submitted to the scheduler.");
@@ -159,6 +162,7 @@ export class EditTaskComponent implements OnInit {
       },
       (error) => console.log(error)
     );  
+    */
   }
 
   onCancel () {

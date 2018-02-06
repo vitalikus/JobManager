@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
+  //styleUrl: : [''];
+  
 })
 export class AppComponent {
   name = 'Job Manager';

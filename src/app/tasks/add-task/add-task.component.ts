@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 import { ActivatedRoute, Params  } from '@angular/router';
 
 import { TaskService } from '../task.service/task.service';
-import { Task } from '../task';
+//import { Task } from '../task';
 
 
 @Component({
@@ -53,7 +53,7 @@ export class AddTaskComponent implements OnInit {
     console.log ("Task cron=" + this.task.Cron);
     console.log ("Task MaxDuration=" + this.task.MaxDuration);
     //console.log ("Task ConflictTasks=" + this.task.ConflictTasks);
-    
+    /*
     this.tasksService.createTask(this.task).subscribe(
       (response: Response) => {
         console.log ("Task successfully added.");
@@ -63,5 +63,6 @@ export class AddTaskComponent implements OnInit {
       (error) => console.log(error)
     ); 
     //this.signupForm.reset();
+    */
   }
 }
