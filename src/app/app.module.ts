@@ -1,7 +1,3 @@
-//import { BrowserModule } from '@angular/platform-browser';
-//import { NgModule } from '@angular/core';
-//import { FormsModule } from '@angular/forms';
-//import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,6 +10,8 @@ import { InputTextModule }  from 'primeng/inputtext';
 import { ButtonModule }  from 'primeng/button';
 import { TableModule }  from 'primeng/table';
 import { DialogModule }  from 'primeng/dialog';
+import {TabViewModule} from 'primeng/tabview';
+//import {Tooltip} from "primeng/primeng";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -26,6 +24,7 @@ import { ListHistoriesComponent } from './history/list-histories/list-histories.
 import { HistoryService } from './history/history.service/history.service';
 import { TaskComponent } from './tasks/task/task.component';
 import { CollapseBasicComponent } from './collapse-basic/collapse-basic.component';
+import { DataTableModule } from 'primeng/datatable';
 
 //import { TaskService } from './task.service/task.service';
 // children: [
@@ -41,6 +40,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
+ 
     AppComponent,
     AddTaskComponent,
     EditTaskComponent,
@@ -49,7 +49,7 @@ const appRoutes: Routes = [
     HistoryComponent,
     ListHistoriesComponent,
     TaskComponent,
-    CollapseBasicComponent
+    CollapseBasicComponent    
   ],
   imports: [
     BrowserModule,
@@ -60,6 +60,8 @@ const appRoutes: Routes = [
     InputTextModule,
     DialogModule,
     ButtonModule,
+    TabViewModule,
+    DataTableModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],

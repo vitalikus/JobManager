@@ -1,21 +1,11 @@
 <h4>Welcome to Job Manager</h4>
 <p>Manage your tasks and jobs</p>
-<hr>
-<div class="container">
-    <div class="row">      
-        <ul class="nav nav-tabs">         
-          <li class="nav-item"
-              routerLinkActive="active">
-            <a class="nav-link" role="tab" id="tasks-tab" routerLink="tasks">Tasks</a>            
-          </li>
-          <li class="nav-item"
-              routerLinkActive="active">
-            <a class="nav-link" role="tab" id="history-tab" routerLink="/history">History</a>
-          </li>
-        </ul>      
-    </div>
-    <div class="row">    
-        <router-outlet></router-outlet>      
-    </div>
-  </div>
-  
+ 
+  <p-tabView>
+      <p-tabPanel header="Tasks" [selected]="true">
+          <app-view-tasks></app-view-tasks>
+      </p-tabPanel>
+      <p-tabPanel header="History">
+         History component is under construction...
+      </p-tabPanel>
+  </p-tabView>

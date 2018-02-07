@@ -2,8 +2,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
-
+import {TabViewModule} from 'primeng/tabview';
 
 @Component({
   selector: 'app-root',

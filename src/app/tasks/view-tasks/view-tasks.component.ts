@@ -10,10 +10,14 @@ import { TableModule }  from 'primeng/table';
 import { DialogModule }  from 'primeng/dialog';
 
 
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { TaskService } from '../task.service/task.service';
 import { HistoryService } from '../../history/history.service/history.service';
 
 import { Task } from '../../domain/task';
+
 
 //import { HistoryService } from '../history/history.service/history.service';
 
@@ -34,6 +38,13 @@ export class ViewTasksComponent implements OnInit {
     tasks: Task[];
 
     cols: any[];
+
+    multiSortMeta;// = [];
+
+    durationFilter: number;
+
+    durationTimeout: any;
+
   /*
   tasksArray: {pageToken: string, models: {}[]};
   
@@ -56,13 +67,19 @@ export class ViewTasksComponent implements OnInit {
               }
 */
   ngOnInit() {
-    console.log ("1");
+    
     this.taskService.getTasks("").then(tasks => this.tasks = tasks);
-    console.log ("2");
-        this.cols = [
-            { field: 'TaskName', header: 'TaskName' },
-            { field: 'Cron', header: 'Cron' }            
-        ];
+    
+    this.cols = [
+            { field: 'TaskName', header: 'Task Name' },
+            { field: 'Cron', header: 'Cron' },
+            { field: 'MaxDuration', header: 'Timeout' },            
+            { field: 'ScheduledUrl', header: 'Scheduled Url' }
+                    
+    ];
+    this.multiSortMeta = [];
+    this.multiSortMeta.push({field: 'TaskName', order: 1});        
+    this.multiSortMeta.push({field: 'Cron', order: 1});        
   //  this.onGetFirstPage ();
 
   }
@@ -110,7 +127,15 @@ findSelectedTaskIndex(): number {
     return this.tasks.indexOf(this.selectedTask);
 }
 
+onDurationChange(event, dt) {
+  if (this.durationTimeout) {
+      clearTimeout(this.durationTimeout);
+  }
 
+  this.durationTimeout = setTimeout(() => {
+      dt.filter(event.value, 'MaxDuration', 'gt');
+  }, 250);
+}
 
   onGet() {
   //  this.onGetFirstPage ();

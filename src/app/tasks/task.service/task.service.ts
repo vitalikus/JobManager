@@ -27,20 +27,16 @@ export class TaskService  {
   }
 */
   getTasks(Token: string) {
-    console.log ("Function: getTasks()");
-
     let url =  'https://ldd-scheduler-test.mybluemix.net/api/scheduler/tasks';
     let urlToken = '/'+ Token;
 
-    console.log ("Function: getTasks() 1");
 
     if (Token != "") { url = url+ urlToken}
-    console.log ("url = " + url) ;
+
     return this.http.get<any>(url)
-    .toPromise()
-    .then(res => <Task[]> res.models)
-    .then(data => data);
-    //return this.http.get (url, {headers: this.headers});
+      .toPromise()
+      .then(res => <Task[]> res.models)
+      .then(data => data);    
   }
 /*
   getTaskById(id: string) {    
