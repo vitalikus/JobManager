@@ -8,7 +8,8 @@ import { InputTextModule }  from 'primeng/inputtext';
 import { ButtonModule }  from 'primeng/button';
 import { TableModule }  from 'primeng/table';
 import { DialogModule }  from 'primeng/dialog';
-
+import { DataTableModule} from 'primeng/datatable';
+//import { DomHandler, Tooltip} from "primeng/primeng";
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -58,23 +59,29 @@ export class ViewTasksComponent implements OnInit {
   "ResponseBody": ""}]}; // {Body: string}[]=[];
   */
   // {pageToken: string, models: {}[]};
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService,
+              private route: ActivatedRoute,
+            //  private location: Location,
+              private router: Router ) {
+              //this.route.params.subscribe(res => console.log(res.id));
+  }
   /*,
               private historyService: HistoryService,
-              private route: ActivatedRoute,
-              private router: Router) { 
-                this.route.params.subscribe(res => console.log(res.id));
-              }
+              
 */
   ngOnInit() {
     
     this.taskService.getTasks("").then(tasks => this.tasks = tasks);
+
+    //this.route.params.switchMap((params: Params) => this.bikeService.getBike(+params['id']))
+      //.subscribe(bike => this.bike = bike);
     
     this.cols = [
-            { field: 'TaskName', header: 'Task Name' },
-            { field: 'Cron', header: 'Cron' },
-            { field: 'MaxDuration', header: 'Timeout' },            
-            { field: 'ScheduledUrl', header: 'Scheduled Url' }
+            { field: '_id', header: 'ID', width: '25%' },
+            { field: 'TaskName', header: 'Task Name', width: '30%' },
+            { field: 'Cron', header: 'Cron', width: '10%' },
+            { field: 'MaxDuration', header: 'Timeout', width: '10%' },            
+            { field: 'ScheduledUrl', header: 'Scheduled Url', width: '25%' }
                     
     ];
     this.multiSortMeta = [];
@@ -88,9 +95,19 @@ export class ViewTasksComponent implements OnInit {
     this.newTask = true;
     this.task = new PrimeTask();
     this.displayDialog = true;
-}
+  }
 
-save() {
+  editTask(task: Task): void {
+    this.selectedTask = task;
+    this.router.navigate(['/task', this.selectedTask._id]);
+  }
+
+  removeTask(task: Task): void {
+    this.selectedTask = task;
+    this.router.navigate(['/task', this.selectedTask._id]);
+  }
+
+  save() {
     const tasks = [...this.tasks];
     if (this.newTask) {
         tasks.push(this.task);

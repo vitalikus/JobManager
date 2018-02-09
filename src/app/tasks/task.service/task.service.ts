@@ -38,15 +38,12 @@ export class TaskService  {
       .then(res => <Task[]> res.models)
       .then(data => data);    
   }
-/*
-  getTaskById(id: string) {    
+
+  getTask(id: string) {    
     console.log ("getTaskById");
-    return "";
-
-    
-    //return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/'+id, {headers: this.headers});
+    return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/'+id);
   }
-
+/*
   getTaskStatusById(id: string) {    
     return console.log ("getTaskStatusById");
     //return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/status/'+id, {headers: this.headers});
