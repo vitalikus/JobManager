@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { LoadingModule } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule }  from 'primeng/inputtext';
 import { ButtonModule }  from 'primeng/button';
@@ -11,7 +12,7 @@ import { DialogModule }  from 'primeng/dialog';
 import { DataTableModule} from 'primeng/datatable';
 //import { DomHandler, Tooltip} from "primeng/primeng";
 
-import { BrowserModule } from '@angular/platform-browser';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TaskService } from '../task.service/task.service';

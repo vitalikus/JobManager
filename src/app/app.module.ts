@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { LoadingModule } from 'ngx-loading';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule }  from 'primeng/inputtext';
@@ -33,14 +34,12 @@ const appRoutes: Routes = [
  { path: '', component: ViewTasksComponent},
  { path: 'tasks', component: ViewTasksComponent}, 
  { path: 'task/:id', component: EditTaskComponent},
- { path: 'task/:id/edit', component: EditTaskComponent},
  { path: 'addtask', component: AddTaskComponent},
  { path: 'history', component: ListHistoriesComponent}
 ];
 
 @NgModule({
   declarations: [
- 
     AppComponent,
     AddTaskComponent,
     EditTaskComponent,
@@ -53,6 +52,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    LoadingModule,
     BrowserAnimationsModule,
     FormsModule,
     TableModule,

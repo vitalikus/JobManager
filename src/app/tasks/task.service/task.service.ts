@@ -30,8 +30,9 @@ export class TaskService  {
     let url =  'https://ldd-scheduler-test.mybluemix.net/api/scheduler/tasks';
     let urlToken = '/'+ Token;
 
+    if (Token != "") { url = url+ urlToken }
 
-    if (Token != "") { url = url+ urlToken}
+    //let promise = new Promise ((resolve, reject) => {})
 
     return this.http.get<any>(url)
       .toPromise()
@@ -41,7 +42,20 @@ export class TaskService  {
 
   getTask(id: string) {    
     console.log ("getTaskById");
-    return this.http.get ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/'+id);
+
+    let promise = new Promise ((resolve, reject) => {
+      let apiURL = 'https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/'+id;
+
+      this.http.get(apiURL)
+      .toPromise()
+      .then(
+        res => { // Success
+          //console.log(res.json());
+          resolve();
+        }
+      );
+  });
+  return promise;
   }
 /*
   getTaskStatusById(id: string) {    

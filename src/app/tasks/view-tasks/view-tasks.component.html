@@ -4,8 +4,7 @@
     <div class="col-12">
       <h2>Tasks</h2>
       <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-      <a [routerLink]="['/tasks/add']">
-        <button class="btn btn-primary sc-btn">Create task</button></a><br><br>
+      <a [routerLink]="['/tasks/add']"><button class="btn btn-primary sc-btn">Create task</button></a><br><br>
          <p-dataTable [value]="tasks"
         [rows]="20" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,20,100]"
         sortField="TaskName"
@@ -18,7 +17,7 @@
         </p-header>
         <p-column field="TaskName" header="Task Name" sortable="true">
            <ng-template let-col let-task="rowData" pTemplate="body">
-            <a href='#' [routerLink]="['/task/edit', task._id]" style="color:#006086">{{task[col.field]}}</a>
+            <a href='#' [routerLink]="['/task', task._id]" style="color:#006086">{{task[col.field]}}</a>
           </ng-template>
         </p-column>
         <p-column field="Cron" header="Cron"></p-column>
