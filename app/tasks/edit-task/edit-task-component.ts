@@ -39,6 +39,7 @@ export class EditTaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initTask ();
     this.loading = true;
     this.activatedRoute.params.subscribe((params: Params) => {
       const id = params['id'];
@@ -49,6 +50,16 @@ export class EditTaskComponent implements OnInit {
     });
   }
 
+initTask () {
+  this.task = <Task>{};
+  this.task.TaskName = '';
+  this.task.Cron = '';
+  this.task.Body = '';
+  this.task.MaxDuration = '';
+  this.task.ScheduledUrl = '';
+  this.task.Headers = '';
+  this.task.ConflictTasks = '';
+}
 
   loadTask(id) {
     console.log ('loadTask:' + id);
@@ -61,23 +72,26 @@ export class EditTaskComponent implements OnInit {
       (error) => console.log(error)
     );
     */
-    this.taskService.getTask(id).then((response: any) => {
+   this.taskService.getTask(id).then(task => this.task = task);
+   this.loading = false;
 
-      if (response.success) {
-        console.log (response);
+   /*
+    this.taskService.getTask(id).then((response: any) => {
+     // console.log (response.task);
+      if (response) {
         this.task = response;
-        console.log ('Taskname:' + this.task.TaskName);
         this.loading = false;
       } else {
-        this.showMessage(false, 'Unable to load task. Please try again later');
+        this.showMessage(false, 'Unable to load task. Please try again later 1');
         this.loading = false;
         this.needRedirect = true;
       }
     }).catch(() => {
-      this.showMessage(false, 'Unable to load task. Please try again later');
+      this.showMessage(false, 'Unable to load task. Please try again later 2');
       this.loading = false;
       this.needRedirect = true;
     });
+    */
   }
 
   showMessage(isSuccess, msg) {

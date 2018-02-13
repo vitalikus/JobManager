@@ -3,10 +3,6 @@ import { HttpClient} from '@angular/common/http';
 import { Task } from '../../domain/task';
 import 'rxjs/add/operator/toPromise';
 
-//import { Headers, Response } from '@angular/http';
-//import { Observable } from 'rxjs/Observable';
-
-
 @Injectable()
 export class TaskService  {
 
@@ -27,20 +23,12 @@ export class TaskService  {
   }
 
   getTask(id: string) {
-    console.log ('getTaskById');
-
-    const promise = new Promise ((resolve, reject) => {
       const apiURL = 'https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/' + id;
 
-      this.http.get(apiURL)
+      return this.http.get<any>(apiURL)
       .toPromise()
-      .then(
-        res => { // Success
-          resolve();
-        }
-      );
-  });
-  return promise;
+      .then(res => <Task> res)
+      .then (data => data);
   }
 /*
   getTaskStatusById(id: string) {    

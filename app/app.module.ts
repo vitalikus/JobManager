@@ -26,7 +26,6 @@ import { HistoryService } from './history/history.service/history.service';
 import { TaskComponent } from './tasks/task/task.component';
 import { CollapseBasicComponent } from './collapse-basic/collapse-basic.component';
 import { DataTableModule } from 'primeng/datatable';
-import { LayoutComponent } from './layout/layout.component';
 
 const appRoutes: Routes = [
  { path: '', component: ViewTasksComponent},
@@ -46,8 +45,7 @@ const appRoutes: Routes = [
     HistoryComponent,
     ListHistoriesComponent,
     TaskComponent,
-    CollapseBasicComponent,
-    LayoutComponent
+    CollapseBasicComponent
   ],
   imports: [
     BrowserModule,

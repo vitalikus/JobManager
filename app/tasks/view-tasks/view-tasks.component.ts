@@ -59,15 +59,11 @@ export class ViewTasksComponent implements OnInit {
   }
   /*,
               private historyService: HistoryService,
-              
 */
   ngOnInit() {
-    
-    this.taskService.getTasks("").then(tasks => this.tasks = tasks);
 
-    //this.route.params.switchMap((params: Params) => this.bikeService.getBike(+params['id']))
-      //.subscribe(bike => this.bike = bike);
-    
+    this.taskService.getTasks('').then(tasks => this.tasks = tasks);
+
     this.cols = [
             { field: '_id', header: 'ID', width: '25%' },
             { field: 'TaskName', header: 'Task Name', width: '30%' },
