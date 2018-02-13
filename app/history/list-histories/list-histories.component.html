@@ -1,0 +1,29 @@
+<h3>Histories View</h3>
+<div class="container">    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Task name</th>
+          <th>Response Status</th>
+          <th>Start date</th>
+          <th>Duration</th>
+          <th>Response body</th>          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let history of historyArray.models">            
+          <td>{{history.taskName}}</td>            
+          <td>{{history.ResponseStatus}}</td>
+          <td>{{history.StartDate}}</td>          
+          <td>{{history.Duration}}</td>          
+          <td>{{history.ResponseBody}}</td>          
+        </tr>       
+      </tbody>
+    </table>
+    <nav aria-label="Task history navigation">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" (click)="onGetFirstPage()">First page</a></li>      
+          <li class="page-item"><a class="page-link" (click)="onGetNextPage()">Next page</a></li>
+        </ul>
+      </nav>
+</div>
