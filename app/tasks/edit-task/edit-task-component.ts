@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router  } from '@angular/router';
 import { Location  } from '@angular/common';
 
+import {MultiSelectModule} from 'primeng/multiselect';
+import { SelectItem } from 'primeng/primeng';
+
 import {EditorModule} from 'primeng/editor';
 /*
 Custom components
@@ -21,14 +24,14 @@ import { HistoryService } from '../../history/history.service/history.service';
 export class EditTaskComponent implements OnInit {
   loading = false;
   task: Task;
-
+  tasks: Task[];
   needRedirect = false;
   accessError = false;
 
   title: string;
   message: string;
   display = false;
-
+  conflicts: SelectItem[];
   id;
 
   constructor(private taskService: TaskService,
@@ -40,12 +43,14 @@ export class EditTaskComponent implements OnInit {
 
   ngOnInit() {
     this.initTask ();
+  
     this.loading = true;
     this.activatedRoute.params.subscribe((params: Params) => {
       const id = params['id'];
       if (id) {
         console.log ('ngOnInit: ' + id);
         this.loadTask(id);
+        this.loadConflictTasks ();
       }
     });
   }
@@ -60,6 +65,18 @@ initTask () {
   this.task.Headers = '';
   this.task.ConflictTasks = '';
 }
+
+  loadConflictTasks () {
+    this.conflicts = [];
+    this.tasks = [];
+
+    this.taskService.getTasks('').then(tasks => this.tasks = tasks);
+    console.log ('tasks:' + this.tasks);
+    this.tasks.forEach(conflict => {
+      this.conflicts.push ({label: conflict.TaskName, value: {id: conflict._id, name: conflict.TaskName}});
+    });
+    console.log ('conflicts:' + this.conflicts);
+  }
 
   loadTask(id) {
     console.log ('loadTask:' + id);

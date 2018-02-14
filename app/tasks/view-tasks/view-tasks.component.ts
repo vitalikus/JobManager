@@ -23,21 +23,13 @@ import { Task } from '../../domain/task';
 })
 export class ViewTasksComponent implements OnInit {
     displayDialog: boolean;
-    
     task: Task = new PrimeTask();
-    
     selectedTask: Task;
-    
     newTask: boolean;
-    
     tasks: Task[];
-
     cols: any[];
-
     multiSortMeta;
-
     durationFilter: number;
-
     durationTimeout: any;
 
   /*
