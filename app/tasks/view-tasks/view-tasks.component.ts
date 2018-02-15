@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Response } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -69,7 +69,7 @@ export class ViewTasksComponent implements OnInit {
   //  this.onGetFirstPage ();
 
   }
- 
+
   showDialogToAdd() {
     this.newTask = true;
     this.task = new PrimeTask();
@@ -100,7 +100,7 @@ export class ViewTasksComponent implements OnInit {
 
 delete() {
     const index = this.findSelectedTaskIndex();
-    this.tasks = this.tasks.filter((val, i) => i != index);
+    this.tasks = this.tasks.filter((val, i) => i !== index);
     this.task = null;
     this.displayDialog = false;
 }

@@ -29,9 +29,9 @@
 
       <div class="form-group">
           <label for="conflicts">CONFLICT TASKS</label><br>
-          <p-multiSelect [options]="conflicts" [(ngModel)]="task.ConflictTasks" ></p-multiSelect>          
+          <p-multiSelect [options]="conflicts" [(ngModel)]="selectedConflicts" [panelStyle]="{minWidth:'12em'}"></p-multiSelect>          
         </div>
-
+        <p>Selected Conflicts: {{selectedConflicts}}</p>
       <div class="form-group">
           <label for="body">BODY</label>
           <input type="text" class="form-control" name="task.Body" id="body" placeholder="Body" [(ngModel)]="task.Body"

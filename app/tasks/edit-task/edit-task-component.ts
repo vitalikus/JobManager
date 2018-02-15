@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap'
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 // , Input
 import { ActivatedRoute, Params, Router  } from '@angular/router';
 import { Location  } from '@angular/common';
@@ -24,7 +24,7 @@ import { HistoryService } from '../../history/history.service/history.service';
 export class EditTaskComponent implements OnInit {
   loading = false;
   task: Task;
-  tasks: Task[];
+  @Input() tasks: Task[];
   needRedirect = false;
   accessError = false;
 
@@ -32,6 +32,8 @@ export class EditTaskComponent implements OnInit {
   message: string;
   display = false;
   conflicts: SelectItem[];
+  selectedconflicts: Task[];
+
   id;
 
   constructor(private taskService: TaskService,
@@ -39,23 +41,35 @@ export class EditTaskComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private location: Location,
               private router: Router) {
+                /*
+                this.conflicts = [
+                  {label: 'Task 1', value: {id: 1, name: 'Task 1'}},
+                  {label: 'Task 2', value: {id: 2, name: 'Task 2'}},
+                  {label: 'Task 3', value: {id: 3, name: 'Task 3'}},
+                  {label: 'Task 4', value: {id: 4, name: 'Task 4'}},
+                  {label: 'Task 5', value: {id: 5, name: 'Task 5'}},
+                ];
+                */
   }
 
   ngOnInit() {
+    console.log ('input tasks: ' + this.tasks);
     this.initTask ();
-  
     this.loading = true;
     this.activatedRoute.params.subscribe((params: Params) => {
       const id = params['id'];
       if (id) {
         console.log ('ngOnInit: ' + id);
         this.loadTask(id);
+       // console.log ('loadConflictTasks before');
         this.loadConflictTasks ();
+     //   console.log ('loadConflictTasks after');
       }
     });
   }
 
 initTask () {
+  console.log ('initTask');
   this.task = <Task>{};
   this.task.TaskName = '';
   this.task.Cron = '';
@@ -67,15 +81,17 @@ initTask () {
 }
 
   loadConflictTasks () {
+    console.log ('loadConflictTasks');
     this.conflicts = [];
-    this.tasks = [];
+    // this.tasks = [];
 
-    this.taskService.getTasks('').then(tasks => this.tasks = tasks);
-    console.log ('tasks:' + this.tasks);
+    // this.taskService.getTasks('').then(tasks => this.tasks = tasks);
+
     this.tasks.forEach(conflict => {
+      console.log ('task to conflict:' + conflict.TaskName);
       this.conflicts.push ({label: conflict.TaskName, value: {id: conflict._id, name: conflict.TaskName}});
     });
-    console.log ('conflicts:' + this.conflicts);
+    // console.log ('conflicts:' + this.conflicts);
   }
 
   loadTask(id) {
