@@ -24,7 +24,7 @@ import { HistoryService } from '../../history/history.service/history.service';
 export class EditTaskComponent implements OnInit {
   loading = false;
   task: Task;
-  @Input() tasks: Task[];
+  tasks: Task[];
   needRedirect = false;
   accessError = false;
 
@@ -53,6 +53,7 @@ export class EditTaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tasks = [];
     console.log ('input tasks: ' + this.tasks);
     this.initTask ();
     this.loading = true;
@@ -66,6 +67,7 @@ export class EditTaskComponent implements OnInit {
      //   console.log ('loadConflictTasks after');
       }
     });
+    
   }
 
 initTask () {
@@ -85,13 +87,14 @@ initTask () {
     this.conflicts = [];
     // this.tasks = [];
 
-    // this.taskService.getTasks('').then(tasks => this.tasks = tasks);
+    this.taskService.getTasks('').then(tasks => this.tasks = tasks);
+    // console.log ('tasks:' + this.tasks);
 
-    this.tasks.forEach(conflict => {
-      console.log ('task to conflict:' + conflict.TaskName);
-      this.conflicts.push ({label: conflict.TaskName, value: {id: conflict._id, name: conflict.TaskName}});
+    this.tasks.forEach(task_ => {
+      // console.log (task_.TaskName);
+      this.conflicts.push ({label: task_.TaskName, value: {id: task_._id, name: task_.TaskName}});
     });
-    // console.log ('conflicts:' + this.conflicts);
+     // console.log ('conflicts:' + this.conflicts);
   }
 
   loadTask(id) {

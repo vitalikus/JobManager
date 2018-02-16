@@ -55,7 +55,7 @@ export class ViewTasksComponent implements OnInit {
   ngOnInit() {
 
     this.taskService.getTasks('').then(tasks => this.tasks = tasks);
-
+    //console.log ('task list' + this.tasks);
     this.cols = [
             { field: '_id', header: 'ID', width: '25%' },
             { field: 'TaskName', header: 'Task Name', width: '30%' },
