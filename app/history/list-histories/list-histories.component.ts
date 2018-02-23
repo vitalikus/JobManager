@@ -35,15 +35,13 @@ export class ListHistoriesComponent implements OnInit {
   constructor(private historyService: HistoryService,
               private route: ActivatedRoute,
               private router: Router) {
-               /* this.route.params.subscribe(res => console.log(res.id) ); */
               }
 
   ngOnInit() {
     this.loadHistory ();
     this.multiSortMeta = [];
-    this.multiSortMeta.push({field: 'StartDate', order: 1});         
-    this.multiSortMeta.push({field: 'ResponseStatus', order: 1});   
-    
+    this.multiSortMeta.push({field: 'StartDate', order: 1});
+    this.multiSortMeta.push({field: 'ResponseStatus', order: 1});
   }
 
   loadHistory () {
@@ -57,9 +55,7 @@ export class ListHistoriesComponent implements OnInit {
           this.pageToken = historyArray['pageToken'];
           this.histories = historyArray['models'];
           this.histories.forEach(log => {
-            console.log (log.taskName + ' ' + log.StartDate);
              const dateLog = moment (log.StartDate).format('YYYY-MM-DD HH:mm:ss ZZ');
-             console.log (dateLog);
              this.histories[index].StartDate = dateLog;
              index ++;
           });
@@ -69,20 +65,6 @@ export class ListHistoriesComponent implements OnInit {
           console.log('Error on loading history: ' + error);
         }
     );
-
-    // let index = 0;
-
-    console.log ('histories.length = ' + this.histories.length);
-
-
-    this.histories.forEach(log => {
-      console.log (log.taskName + ' ' + log.StartDate);
-      // const dateLog = moment (log.StartDate).format('llll');
-      // console.log (dateLog);
-      // this.history[index].StartDate = dateLog;
-      // index ++;
-    });
-    console.log ('after cycle');
   }
 
   /*
