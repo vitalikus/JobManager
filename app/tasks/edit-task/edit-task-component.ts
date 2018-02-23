@@ -1,13 +1,13 @@
-import 'rxjs/add/operator/switchMap'
+
+import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 // , Input
 import { ActivatedRoute, Params, Router  } from '@angular/router';
 import { Location  } from '@angular/common';
-
+/* PrimeNG */
 import {MultiSelectModule} from 'primeng/multiselect';
-import { SelectItem } from 'primeng/primeng';
-
 import {EditorModule} from 'primeng/editor';
+import {SelectItem} from 'primeng/primeng';
 /*
 Custom components
 */
@@ -31,9 +31,9 @@ export class EditTaskComponent implements OnInit {
   title: string;
   message: string;
   display = false;
+  // tslint:disable-next-line:no-input-on-prefix
   conflicts: SelectItem[];
-  selectedconflicts: Task[];
-
+  selectedConflicts: string[] = [];
   id;
 
   constructor(private taskService: TaskService,
@@ -41,33 +41,21 @@ export class EditTaskComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private location: Location,
               private router: Router) {
-                /*
-                this.conflicts = [
-                  {label: 'Task 1', value: {id: 1, name: 'Task 1'}},
-                  {label: 'Task 2', value: {id: 2, name: 'Task 2'}},
-                  {label: 'Task 3', value: {id: 3, name: 'Task 3'}},
-                  {label: 'Task 4', value: {id: 4, name: 'Task 4'}},
-                  {label: 'Task 5', value: {id: 5, name: 'Task 5'}},
-                ];
-                */
+
   }
 
   ngOnInit() {
-    this.tasks = [];
-    console.log ('input tasks: ' + this.tasks);
+    this.conflicts = [];
+    this.tasks = this.taskService.getAllTasks ();
     this.initTask ();
     this.loading = true;
     this.activatedRoute.params.subscribe((params: Params) => {
       const id = params['id'];
       if (id) {
-        console.log ('ngOnInit: ' + id);
         this.loadTask(id);
-       // console.log ('loadConflictTasks before');
         this.loadConflictTasks ();
-     //   console.log ('loadConflictTasks after');
       }
     });
-    
   }
 
 initTask () {
@@ -79,26 +67,25 @@ initTask () {
   this.task.MaxDuration = '';
   this.task.ScheduledUrl = '';
   this.task.Headers = '';
-  this.task.ConflictTasks = '';
+  this.task.ConflictTasks = [];
 }
 
-  loadConflictTasks () {
-    console.log ('loadConflictTasks');
-    this.conflicts = [];
-    // this.tasks = [];
+loadConflictTasks () {
+  console.log ('loadConflictTasks');
 
-    this.taskService.getTasks('').then(tasks => this.tasks = tasks);
-    // console.log ('tasks:' + this.tasks);
+  this.tasks.forEach(task_ => {
+    if (task_._id !== this.task._id) {
+      this.conflicts.push ({
+                           'label': task_.TaskName,
+                           'value': task_._id
+      });
+    }
+  });
+}
 
-    this.tasks.forEach(task_ => {
-      // console.log (task_.TaskName);
-      this.conflicts.push ({label: task_.TaskName, value: {id: task_._id, name: task_.TaskName}});
-    });
-     // console.log ('conflicts:' + this.conflicts);
-  }
 
   loadTask(id) {
-    console.log ('loadTask:' + id);
+  console.log ('loadTask: ' + id);
     /*
      this.tasksService.updateTask(this.task).subscribe(
       (response: Response) => {
@@ -108,9 +95,10 @@ initTask () {
       (error) => console.log(error)
     );
     */
+
    this.taskService.getTask(id).then(task => this.task = task);
    this.loading = false;
-
+   
    /*
     this.taskService.getTask(id).then((response: any) => {
      // console.log (response.task);
@@ -145,18 +133,17 @@ initTask () {
   }
 
   onSave () {
-    console.log ( ' Task name = ' + this.task.TaskName);
+    console.log ( 'Saving task: ' + this.task.TaskName);
 
-    /*
-
-    this.tasksService.updateTask(this.task).subscribe(
+    this.taskService.updateTask(this.task).subscribe(
       (response: Response) => {
-        console.log ("Task successfully saved.");
+        console.log ('"Task successfully saved.');
         console.log(response);
       },
-      (error) => console.log(error)
+      (error) => console.log('Error on saving: ' + error)
     );
-    */
+    console.log ( 'End of saving task: ' + this.task.TaskName);
+
   }
 
   onDelete ()  {
@@ -211,7 +198,7 @@ initTask () {
   }
 
   onCancel () {
-    this.router.navigate(['tasks']);//, {relativeTo: this.route});
+    this.router.navigate(['tasks']);
   }
 }
 

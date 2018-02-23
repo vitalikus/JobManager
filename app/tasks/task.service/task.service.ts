@@ -1,34 +1,59 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 import { Task } from '../../domain/task';
 import 'rxjs/add/operator/toPromise';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' })
+};
+
 @Injectable()
 export class TaskService  {
+  tasks: Task[];
+  taskURL = 'https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/';
+  tasksURL = 'https://ldd-scheduler-test.mybluemix.net/api/scheduler/tasks/';
+
 
   constructor(private http: HttpClient) {}
+  
+  getAllTasks () {
+    return this.tasks;
+  }
 
-  headers = new Headers({'Content-Type': 'application/json'});
+  setTasks (tasks_) {
+    this.tasks = tasks_;
+  }
 
   getTasks(Token: string) {
-    let url =  'https://ldd-scheduler-test.mybluemix.net/api/scheduler/tasks';
-    const urlToken = '/' + Token;
+    let apiURL = this.tasksURL;
+    if (Token !== '') { apiURL = apiURL + Token; }
 
-    if (Token !== '') { url = url + urlToken; }
+  return (this.http.get(apiURL));
 
-    return this.http.get<any>(url)
+/*
+    return this.http.get<any>(apiURL)
       .toPromise()
       .then(res => <Task[]> res.models)
       .then(data => data);
+*/
   }
 
   getTask(id: string) {
-      const apiURL = 'https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/' + id;
+      const apiURL = this.taskURL + id;
 
       return this.http.get<any>(apiURL)
       .toPromise()
       .then(res => <Task> res)
       .then (data => data);
+  }
+
+  updateTask(task) {
+    const body = JSON.stringify(task);
+    const apiURL = this.taskURL + 'update/' + task._id + '/' + task._rev;
+    console.log ('updateTask:' + apiURL);
+
+    return this.http.put (apiURL, body, httpOptions);
   }
 /*
   getTaskStatusById(id: string) {    
@@ -56,10 +81,7 @@ export class TaskService  {
     //return this.http.post ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/create', task, {headers: this.headers});
   }
   
-  updateTask(task) {  
-    return console.log ("updateTask");
-    //return this.http.put ('https://ldd-scheduler-test.mybluemix.net/api/scheduler/task/update/'+task._id + '/'+task._rev, JSON.stringify(task), {headers: this.headers});
-  }
+  u
 
   deleteTask(id: string) {    
     return console.log ("deleteTask");

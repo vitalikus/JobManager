@@ -1,29 +1,37 @@
-<h3>Histories View</h3>
-<div class="container">    
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Task name</th>
-          <th>Response Status</th>
-          <th>Start date</th>
-          <th>Duration</th>
-          <th>Response body</th>          
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let history of historyArray.models">            
-          <td>{{history.taskName}}</td>            
-          <td>{{history.ResponseStatus}}</td>
-          <td>{{history.StartDate}}</td>          
-          <td>{{history.Duration}}</td>          
-          <td>{{history.ResponseBody}}</td>          
-        </tr>       
-      </tbody>
-    </table>
-    <nav aria-label="Task history navigation">
-        <ul class="pagination">
-          <li class="page-item"><a class="page-link" (click)="onGetFirstPage()">First page</a></li>      
-          <li class="page-item"><a class="page-link" (click)="onGetNextPage()">Next page</a></li>
-        </ul>
-      </nav>
+<div class="container-fluid" card-body>
+  <div class="row">
+    <div class="col-12">
+      <h2>History</h2>
+      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+      <p-dataTable [value]="histories" [loading]="loading" loadingIcon="fa-spinner"
+        [rows]="20" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,20,100]"
+        [multiSortMeta]="multiSortMeta"
+        [globalFilter]="gb">
+        <p-header>
+          <div style="text-align:left">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input #gb type="text" placeholder="Search">
+          </div>
+        </p-header>
+        <p-column field="StartDate" header="Start date" sortable="true"></p-column>
+        <p-column field="taskName" header="Task Name" sortable="true">
+           <ng-template let-col let-log="rowData" pTemplate="body">
+            <a href='#' [routerLink]="['/history', log._id]" style="color:#006086">{{log[col.field]}}</a>
+          </ng-template>        
+        </p-column>
+       
+        <p-column field="Duration" header="Duration" sortable="true"></p-column>
+        <p-column field="ResponseStatus" header="Status" sortable="true"></p-column>
+
+      </p-dataTable>
+
+    </div>
+  </div>
 </div>
+
+<p-dialog [(header)]="title" [(visible)]="display" modal="modal" width="300" [responsive]="true">
+  <p>{{ message }}</p>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="close()" label="Ok"></button>
+  </p-footer>
+</p-dialog>

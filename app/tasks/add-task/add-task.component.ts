@@ -23,9 +23,9 @@ export class AddTaskComponent implements OnInit {
     
     private route: ActivatedRoute) { 
       this.route.params.subscribe();
-      //console.log (this.id);
+      // console.log (this.id);
     }
-
+/*
   task = {    
     "TaskName": "",
     "ScheduledUrl": "",
@@ -35,7 +35,7 @@ export class AddTaskComponent implements OnInit {
     "MaxDuration": 0,
     //"ConflictTasks": [""],     
   }
-
+*/
   ngOnInit() {
   }
 
@@ -47,11 +47,11 @@ export class AddTaskComponent implements OnInit {
     this.submitted = true;
  
     console.log ("saved = " + this.submitted);     
-    console.log ("Task name =" + this.task.TaskName);
-    console.log ("Task ScheduledUrl=" + this.task.ScheduledUrl);
+    //console.log ("Task name =" + this.task.TaskName);
+    //console.log ("Task ScheduledUrl=" + this.task.ScheduledUrl);
     //console.log ("Task Headers=" + this.task.Headers);
-    console.log ("Task cron=" + this.task.Cron);
-    console.log ("Task MaxDuration=" + this.task.MaxDuration);
+    //console.log ("Task cron=" + this.task.Cron);
+    //console.log ("Task MaxDuration=" + this.task.MaxDuration);
     //console.log ("Task ConflictTasks=" + this.task.ConflictTasks);
     /*
     this.tasksService.createTask(this.task).subscribe(

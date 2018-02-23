@@ -27,7 +27,6 @@ import { TaskComponent } from './tasks/task/task.component';
 import { CollapseBasicComponent } from './collapse-basic/collapse-basic.component';
 import { DataTableModule } from 'primeng/datatable';
 import { MultiSelectModule } from 'primeng/multiselect';
-//import { SelectItem } from 'primeng/primeng';
 
 const appRoutes: Routes = [
  { path: '', component: ViewTasksComponent},
@@ -62,7 +61,7 @@ const appRoutes: Routes = [
     TabViewModule,
     DataTableModule,
     EditorModule,
-  ///  SelectItem,
+//  SelectItem,
     MultiSelectModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes)

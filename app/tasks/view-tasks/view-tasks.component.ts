@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TaskService } from '../task.service/task.service';
 import { HistoryService } from '../../history/history.service/history.service';
 import { Task } from '../../domain/task';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-view-tasks',
@@ -25,17 +26,21 @@ export class ViewTasksComponent implements OnInit {
     displayDialog: boolean;
     task: Task = new PrimeTask();
     selectedTask: Task;
+    pageToken = null;
     newTask: boolean;
     tasks: Task[];
     cols: any[];
     multiSortMeta;
     durationFilter: number;
     durationTimeout: any;
+    private reqSubscription: Subscription;
+   // conflicts: any[];
 
   /*
   tasksArray: {pageToken: string, models: {}[]};
   
-  arrayHistory: {pageToken: string, models: [{"taskId": "",
+  arrayHistory: {pageToken: string, models: [{
+    "taskId": "",
   "taskName": "",
   "_id": "",
   "_rev": "",
@@ -53,9 +58,7 @@ export class ViewTasksComponent implements OnInit {
               private historyService: HistoryService,
 */
   ngOnInit() {
-
-    this.taskService.getTasks('').then(tasks => this.tasks = tasks);
-    //console.log ('task list' + this.tasks);
+    this.loadTasks ();
     this.cols = [
             { field: '_id', header: 'ID', width: '25%' },
             { field: 'TaskName', header: 'Task Name', width: '30%' },
@@ -66,8 +69,21 @@ export class ViewTasksComponent implements OnInit {
     this.multiSortMeta = [];
     this.multiSortMeta.push({field: 'TaskName', order: 1});
     this.multiSortMeta.push({field: 'Cron', order: 1});
-  //  this.onGetFirstPage ();
+   }
 
+  loadTasks () {
+    this.reqSubscription = this.taskService.getTasks('').subscribe(
+       (response: Response) => {
+          let tasksArray: any = [];
+          tasksArray = response;
+          this.pageToken = tasksArray['pageToken'];
+          this.tasks = tasksArray['models'];
+          this.taskService.setTasks(this.tasks);
+      },
+        (error) => {
+          console.log(error);
+        }
+    );
   }
 
   showDialogToAdd() {
